@@ -10,4 +10,4 @@ Coleção de templates reutilizáveis de aplicações (frontend e backend).
 ## Backend
 
 - **Django Backend Template**  
-  (em breve)
+  https://github.com/cros-dev/django-backend-template
