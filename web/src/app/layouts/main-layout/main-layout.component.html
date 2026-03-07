@@ -1,0 +1,29 @@
+<div class="min-h-screen bg-gray-50 flex flex-col">
+  <app-header class="fixed top-0 z-30 w-full"></app-header>
+
+  <div class="flex flex-1 pt-16">
+    <app-sidebar
+      [class.translate-x-0]="isSidebarOpen()"
+      [class.-translate-x-full]="!isSidebarOpen()"
+      class="fixed inset-y-0 left-0 z-20 w-64 mt-16 transform transition-transform duration-300 ease-in-out bg-white border-r border-gray-200 lg:static lg:mt-0"
+    >
+    </app-sidebar>
+
+    <main
+      class="flex-1 transition-all duration-300 ease-in-out p-4 md:p-6"
+      [class.lg:ml-0]="!isSidebarOpen()"
+    >
+      <div class="max-w-7xl mx-auto">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
+
+  @if (isSidebarOpen()) {
+    <div
+      (click)="toggleSidebar()"
+      class="fixed inset-0 z-10 bg-gray-900/50 lg:hidden"
+    >
+    </div>
+  }
+</div>
