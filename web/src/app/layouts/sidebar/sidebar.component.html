@@ -1,6 +1,6 @@
-<nav class="flex flex-col h-full py-6 overflow-y-auto bg-white">
+<nav class="flex flex-col h-full py-6 overflow-y-auto bg-panel-light dark:bg-panel-dark transition-colors duration-300">
   <div class="px-6 mb-4">
-    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+    <p class="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
       Menu Principal
     </p>
   </div>
@@ -9,12 +9,12 @@
     @for (item of menuItems; track item.label) {
       <a
         [routerLink]="item.route"
-        routerLinkActive="bg-indigo-50 text-indigo-700"
+        routerLinkActive="bg-primary-50 text-primary-700 dark:bg-primary-700/10 dark:text-primary-50 shadow-sm!"
         [routerLinkActiveOptions]="{ exact: true }"
-        class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-all duration-200 group"
+        class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg text-gray-600 dark:text-gray-400 hover:bg-surface-hover-light dark:hover:bg-surface-hover-dark hover:text-primary-600 dark:hover:text-primary-600 transition-all duration-200 group cursor-pointer!"
       >
         <svg
-          class="w-5 h-5 text-gray-400 group-hover:text-indigo-600 transition-colors"
+          class="w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-primary-600 dark:group-hover:text-primary-600 transition-colors"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -32,12 +32,16 @@
     }
   </div>
 
-  <div class="mt-auto px-6 py-4 border-t border-gray-100 bg-gray-50/50">
+  <div class="mt-auto px-6 py-4 border-t border-border-light dark:border-border-dark bg-surface-light/50 dark:bg-border-dark/30">
     <div class="flex items-center gap-3">
       <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
       <div class="flex-1 min-w-0">
-        <p class="text-[10px] font-semibold text-gray-500 uppercase">Sistema Online</p>
-        <p class="text-[9px] text-gray-400 font-mono truncate">v1.0.0-stable</p>
+        <p class="text-[10px] font-semibold text-gray-500 dark:text-gray-400 uppercase leading-none mb-1">
+          Sistema Online
+        </p>
+        <p class="text-[9px] text-gray-400 dark:text-gray-500 font-mono truncate">
+          v1.0.0-stable
+        </p>
       </div>
     </div>
   </div>

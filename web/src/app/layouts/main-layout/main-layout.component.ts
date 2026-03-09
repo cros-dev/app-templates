@@ -17,6 +17,9 @@ export class MainLayoutComponent implements OnInit {
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly destroyRef = inject(DestroyRef);
 
+  /**
+   * Signal que reflete se a barra lateral está aberta ou fechada.
+   */
   isSidebarOpen = this.layoutService.isSidebarOpen;
 
   /**

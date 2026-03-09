@@ -14,9 +14,19 @@ export class LoginComponent {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
+  /**
+   * Signal que controla o estado de processamento da autenticação.
+   */
   isLoading = signal<boolean>(false);
+
+  /**
+   * Signal que armazena mensagens de erro retornadas pela API ou validação.
+   */
   errorMessage = signal<string | null>(null);
 
+  /**
+   * Definição do formulário reativo com validações integradas.
+   */
   readonly loginForm = this.fb.nonNullable.group({
     username: ['', [Validators.required]],
     password: ['', [Validators.required, Validators.minLength(4)]]

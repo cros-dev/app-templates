@@ -1,71 +1,130 @@
-<div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-  <div class="sm:mx-auto sm:w-full sm:max-w-md">
-    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 tracking-tight">
+<div class="min-h-screen flex flex-col justify-center items-center py-12 sm:px-6 lg:px-8 bg-surface-light dark:bg-surface-dark transition-colors duration-300">
+
+  <!-- Header -->
+  <div class="sm:mx-auto sm:w-full sm:max-w-md text-center">
+    <h2 class="mt-6 text-3xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white">
       Aceda à sua conta
     </h2>
-    <p class="mt-2 text-center text-sm text-gray-600">
+
+    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
       Utilize as suas credenciais do DjangoAdmin
     </p>
   </div>
 
+  <!-- Card -->
   <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-    <div class="bg-white py-8 px-4 shadow-xl border border-gray-100 sm:rounded-xl sm:px-10">
+    <div class="bg-panel-light dark:bg-panel-dark py-8 px-4 shadow-xl border border-border-light dark:border-border-dark sm:rounded-xl sm:px-10 transition-colors">
 
+      <!-- Error message -->
       @if (errorMessage()) {
-        <div class="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-sm text-red-600">
+        <div class="mb-4 p-3 rounded-lg border text-sm
+                    bg-red-50 border-red-200 text-red-600
+                    dark:bg-red-900/20 dark:border-red-800/50 dark:text-red-400">
           {{ errorMessage() }}
         </div>
       }
 
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <!-- Form -->
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()"
+        class="space-y-6"
+      >
+
+        <!-- Username -->
         <div>
-          <label for="username" class="block text-sm font-medium text-gray-700">
+          <label
+            for="username"
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+          >
             Utilizador
           </label>
+
           <div class="mt-1">
             <input
               id="username"
               type="text"
+              autocomplete="username"
+              required
               formControlName="username"
-              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              class="input-base"
               [class.border-red-500]="loginForm.get('username')?.touched && loginForm.get('username')?.invalid"
             >
           </div>
         </div>
 
+        <!-- Password -->
         <div>
-          <label for="password" class="block text-sm font-medium text-gray-700">
+          <label
+            for="password"
+            class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+          >
             Palavra-passe
           </label>
+
           <div class="mt-1">
             <input
               id="password"
               type="password"
+              autocomplete="current-password"
+              required
               formControlName="password"
-              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              class="input-base"
               [class.border-red-500]="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
             >
           </div>
         </div>
 
+        <!-- Submit -->
         <div>
           <button
             type="submit"
-            [disabled]="isLoading()"
-            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            [disabled]="loginForm.invalid || isLoading()"
+            class="btn-primary w-full"
           >
+
             @if (isLoading()) {
-              <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+
+              <svg
+                class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373
+                  0 0 5.373 0 12h4zm2
+                  5.291A7.962 7.962
+                  0 014 12H0c0 3.042
+                  1.135 5.824 3
+                  7.938l3-2.647z"
+                ></path>
+
               </svg>
+
               A processar...
+
             } @else {
+
               Entrar
+
             }
+
           </button>
         </div>
+
       </form>
+
     </div>
   </div>
 </div>

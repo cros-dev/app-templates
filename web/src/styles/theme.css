@@ -1,0 +1,80 @@
+/* Habilita Dark Mode manual via classe .dark */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ==========================================
+   Tokens de Design Semânticos
+   ========================================== */
+@theme {
+
+  /* Tokens de cores de marca (Primary) */
+  --color-primary-50: var(--color-indigo-50);
+  --color-primary-600: var(--color-indigo-600);
+  --color-primary-700: var(--color-indigo-700);
+
+  /* Tokens de superfícies (backgrounds e painéis) */
+  --color-surface-light: var(--color-gray-50);
+  --color-surface-dark: var(--color-gray-950);
+
+  --color-panel-light: var(--color-white);
+  --color-panel-dark: var(--color-gray-900);
+
+  /* Tokens de borda */
+  --color-border-light: var(--color-gray-200);
+  --color-border-dark: var(--color-gray-800);
+
+  /* Tokens de hover para superfícies */
+  --color-surface-hover-light: var(--color-gray-100);
+  --color-surface-hover-dark: var(--color-gray-800);
+
+}
+
+/* ==========================================
+   Componentes base reutilizáveis
+   ========================================== */
+@layer components {
+
+  /* Input padrão da aplicação */
+  .input-base {
+    @apply appearance-none block w-full px-3 py-2
+    border border-border-light dark:border-border-dark
+    bg-white dark:bg-gray-800
+    rounded-md shadow-sm
+    placeholder-gray-400 dark:placeholder-gray-500
+    focus:outline-none
+    focus:ring-primary-600!
+    focus:border-primary-600!
+    sm:text-sm
+    text-gray-900 dark:text-white
+    transition-colors;
+  }
+
+  /* Botão primário padrão */
+  .btn-primary {
+    @apply flex justify-center items-center
+    py-2 px-4
+    rounded-md
+    text-sm font-semibold
+    text-white
+    bg-primary-600!
+    hover:bg-primary-700!
+    focus:outline-none
+    focus:ring-2 focus:ring-offset-2 focus:ring-primary-600!
+    disabled:opacity-50
+    disabled:cursor-not-allowed
+    transition-colors
+    cursor-pointer!;
+  }
+
+}
+
+/* ==========================================
+   Overrides Globais de Terceiros
+   ========================================== */
+@layer components {
+
+  /* Padroniza hover e borda arredondada de itens de menu do Angular Material */
+  .mat-mdc-menu-item {
+    @apply rounded-md! hover:bg-gray-100! dark:hover:bg-gray-800! transition-colors duration-200!;
+  }
+
+}

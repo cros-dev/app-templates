@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { AuthService } from '../../core/services/auth.service';
 import { LayoutService } from '../../core/services/layout.service';
+import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,11 @@ export class HeaderComponent {
   private readonly authService = inject(AuthService);
   private readonly layoutService = inject(LayoutService);
   private readonly router = inject(Router);
+
+  /**
+   * Serviço responsável pelo gerenciamento de tema (Light/Dark).
+   */
+  readonly themeService = inject(ThemeService);
 
   /**
    * Signal que disponibiliza os dados do usuário autenticado para o template.
