@@ -29,6 +29,10 @@ export const routes: Routes = [
           import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
       },
       {
+        path: 'profile',
+        loadChildren: () => import('./features/profile/profile.routes')
+      },
+      {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full'

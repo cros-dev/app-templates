@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { AuthService } from '../../core/services/auth.service';
 import { LayoutService } from '../../core/services/layout.service';
@@ -8,7 +8,7 @@ import { ThemeService } from '../../core/services/theme.service';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatMenuModule],
+  imports: [MatMenuModule, RouterModule],
   templateUrl: './header.component.html'
 })
 export class HeaderComponent {

@@ -2,11 +2,11 @@
 
   <!-- Header -->
   <div class="sm:mx-auto sm:w-full sm:max-w-md text-center">
-    <h2 class="mt-6 text-3xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white">
+    <h2 class="mt-6 text-3xl font-extrabold leading-tight tracking-tight text-heading">
       Aceda à sua conta
     </h2>
 
-    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+    <p class="mt-2 text-sm text-muted">
       Utilize as suas credenciais do DjangoAdmin
     </p>
   </div>
@@ -17,9 +17,7 @@
 
       <!-- Error message -->
       @if (errorMessage()) {
-        <div class="mb-4 p-3 rounded-lg border text-sm
-                    bg-red-50 border-red-200 text-red-600
-                    dark:bg-red-900/20 dark:border-red-800/50 dark:text-red-400">
+        <div class="alert-error mb-4">
           {{ errorMessage() }}
         </div>
       }
@@ -35,7 +33,7 @@
         <div>
           <label
             for="username"
-            class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            class="form-label"
           >
             Utilizador
           </label>
@@ -48,7 +46,7 @@
               required
               formControlName="username"
               class="input-base"
-              [class.border-red-500]="loginForm.get('username')?.touched && loginForm.get('username')?.invalid"
+              [class.input-error]="loginForm.get('username')?.touched && loginForm.get('username')?.invalid"
             >
           </div>
         </div>
@@ -57,7 +55,7 @@
         <div>
           <label
             for="password"
-            class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            class="form-label"
           >
             Palavra-passe
           </label>
@@ -70,7 +68,7 @@
               required
               formControlName="password"
               class="input-base"
-              [class.border-red-500]="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
+              [class.input-error]="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
             >
           </div>
         </div>
