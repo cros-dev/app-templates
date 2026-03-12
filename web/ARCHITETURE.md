@@ -7,7 +7,7 @@ O princípio fundamental é o encapsulamento: cada funcionalidade deve ser auto-
 
 ### Estrutura de Diretórios
 
-- `/core`: Serviços singleton globais (Auth, Theme, Interceptors), guards funcionais e modelos de domínio que atravessam todo o sistema.
+- `/core`: Serviços singleton globais (Auth, Theme, Toast, Interceptors), guards funcionais e modelos de domínio que atravessam todo o sistema.
 - `/features`: Módulos independentes por domínio (ex: auth, profile, dashboard). Cada pasta de feature deve conter:
   - `pages/`: Componentes que representam rotas completas ou sub-rotas (Child Routes).
   - `components/`: Componentes internos da funcionalidade.
@@ -263,7 +263,7 @@ RO3 --> Page[Public Profile Page]
 ## 13.3. Padrão para Services
 
 - Services de domínio ficam dentro de `features/[feature]/services`.
-- Services globais (auth, layout, theme) ficam em `core/services`.
+- Services globais (auth, layout, theme, toast) ficam em `core/services`. Para notificações (sucesso, erro), usar `ToastService` em vez de injetar `MatSnackBar` diretamente.
 - Todos os métodos públicos que executam chamadas HTTP devem:
   - Retornar **Observables tipados** (`Observable<UserProfileUpdate>`).
   - Utilizar modelos definidos em `models/`.

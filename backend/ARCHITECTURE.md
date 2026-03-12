@@ -27,7 +27,7 @@ Estes componentes podem ser usados sem modificações:
 ### Autenticação JWT
 
 **Endpoints JWT**
-- `POST /api/token/` - Obter token (login)
+- `POST /api/token/` - Obter token (login). Aceita **email** e **password** no corpo JSON.
 - `POST /api/token/refresh/` - Renovar access token
 - `POST /api/token/verify/` - Verificar token
 

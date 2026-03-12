@@ -1,0 +1,99 @@
+<div class="login-page min-h-screen flex flex-col lg:flex-row transition-colors duration-300">
+
+  <!-- Coluna esquerda: imagem + overlay (apenas lg+) -->
+  <div class="hidden lg:flex lg:w-1/2 lg:min-h-screen relative bg-gray-900">
+    <div
+      class="absolute inset-0 bg-cover bg-center"
+      style="background-image: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1200&q=80');"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="absolute inset-0 opacity-90 login-overlay-gradient"
+      aria-hidden="true"
+    ></div>
+  </div>
+
+  <!-- Coluna direita (desktop) / conteúdo full (mobile) -->
+  <div class="flex-1 flex flex-col justify-center items-center bg-surface-light dark:bg-surface-dark p-8 md:p-12 min-h-screen">
+
+    <!-- Card do formulário -->
+    <div class="w-full max-w-md">
+      <div class="bg-panel-light dark:bg-panel-dark p-8 rounded-2xl shadow-xl">
+
+        <h1 class="text-2xl font-bold text-heading mb-1">Entrar</h1>
+        <p class="text-sm text-caption-muted mb-6">Use seu email e senha para acessar a plataforma.</p>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5">
+          <!-- Email -->
+          <div>
+            <label for="email" class="form-label">Email</label>
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              autocomplete="email"
+              placeholder="seu&#64;email.com"
+              class="mt-1 input-base px-4 py-3 text-base"
+              [class.input-error]="loginForm.get('email')?.touched && loginForm.get('email')?.invalid"
+            />
+          </div>
+
+          <!-- Senha -->
+          <div>
+            <label for="password" class="form-label">Senha</label>
+            <input
+              id="password"
+              type="password"
+              formControlName="password"
+              autocomplete="current-password"
+              placeholder="••••••••"
+              class="mt-1 input-base px-4 py-3 text-base"
+              [class.input-error]="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
+            />
+          </div>
+
+          <!-- Submit -->
+          <button
+            type="submit"
+            [disabled]="loginForm.invalid || isLoading()"
+            class="btn-primary w-full mt-2 py-3 text-base"
+          >
+            @if (isLoading()) {
+              <svg
+                class="animate-spin -ml-1 mr-2 h-5 w-5 text-white inline-block"
+                fill="none"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+               ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+               ></path>
+              </svg>
+              Entrando...
+            } @else {
+              Entrar
+            }
+          </button>
+        </form>
+
+        <p class="text-sm text-muted text-center mt-6">
+          Não tem conta?
+          <a routerLink="/auth/register" class="link-primary ml-1">Criar conta</a>
+        </p>
+        <p class="text-sm text-muted text-center mt-2">
+          <a routerLink="/auth/forgot-password" class="link-primary">Esqueceu a senha?</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

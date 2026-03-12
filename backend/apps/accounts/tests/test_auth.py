@@ -23,10 +23,10 @@ class JWTAuthenticationTestCase(TestCase):
         )
 
     def test_token_obtain_pair_success(self):
-        """Testa obtenção de token JWT com credenciais válidas."""
+        """Testa obtenção de token JWT com email e senha válidos."""
         response = self.client.post(
             "/api/token/",
-            {"username": "testuser", "password": "testpass123"},
+            {"email": "test@example.com", "password": "testpass123"},
             format="json",
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -37,7 +37,7 @@ class JWTAuthenticationTestCase(TestCase):
         """Testa obtenção de token com credenciais inválidas."""
         response = self.client.post(
             "/api/token/",
-            {"username": "testuser", "password": "wrongpassword"},
+            {"email": "test@example.com", "password": "wrongpassword"},
             format="json",
         )
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
@@ -45,16 +45,33 @@ class JWTAuthenticationTestCase(TestCase):
     def test_token_obtain_pair_missing_fields(self):
         """Testa obtenção de token com campos faltando."""
         response = self.client.post(
-            "/api/token/", {"username": "testuser"}, format="json"
+            "/api/token/", {"email": "test@example.com"}, format="json"
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_token_obtain_pair_email_not_found(self):
+        """Testa login com email inexistente."""
+        response = self.client.post(
+            "/api/token/",
+            {"email": "nonexistent@example.com", "password": "testpass123"},
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_token_obtain_pair_missing_email(self):
+        """Testa que email é obrigatório."""
+        response = self.client.post(
+            "/api/token/",
+            {"password": "testpass123"},
+            format="json",
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_token_refresh_success(self):
         """Testa refresh de token com refresh token válido."""
-        # Primeiro obtém o token
         token_response = self.client.post(
             "/api/token/",
-            {"username": "testuser", "password": "testpass123"},
+            {"email": "test@example.com", "password": "testpass123"},
             format="json",
         )
         refresh_token = token_response.data["refresh"]
@@ -75,10 +92,9 @@ class JWTAuthenticationTestCase(TestCase):
 
     def test_token_verify_success(self):
         """Testa verificação de token com token válido."""
-        # Primeiro obtém o token
         token_response = self.client.post(
             "/api/token/",
-            {"username": "testuser", "password": "testpass123"},
+            {"email": "test@example.com", "password": "testpass123"},
             format="json",
         )
         access_token = token_response.data["access"]
@@ -98,10 +114,9 @@ class JWTAuthenticationTestCase(TestCase):
 
     def test_authenticated_request_with_token(self):
         """Testa requisição autenticada usando token JWT."""
-        # Obtém token
         token_response = self.client.post(
             "/api/token/",
-            {"username": "testuser", "password": "testpass123"},
+            {"email": "test@example.com", "password": "testpass123"},
             format="json",
         )
         access_token = token_response.data["access"]

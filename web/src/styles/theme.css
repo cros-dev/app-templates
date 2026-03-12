@@ -1,20 +1,29 @@
-/* Habilita Dark Mode manual via classe .dark */
+/* Habilita Dark Mode manual via classe .dark no HTML */
 @custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    @apply antialiased bg-surface-light dark:bg-surface-dark text-text-default dark:text-text-dark transition-colors duration-300;
+  }
+}
 
 /* ==========================================
    Tokens de Design Semânticos
    ========================================== */
 @theme {
+  /* Fonte principal do projeto */
+  --font-family-base: 'Plus Jakarta Sans', sans-serif;
 
-  /* Tokens de cores de marca (Primary) */
-  --color-primary-50: var(--color-indigo-50);
-  --color-primary-600: var(--color-indigo-600);
-  --color-primary-700: var(--color-indigo-700);
+  /* Tokens de cores primárias da marca */
+  --color-primary-50: #EEF0F9;
+  --color-primary-500: #37448C;
+  --color-primary-600: #343D73;
+  --color-primary-700: #283059;
+  --color-primary-800: #283059;
 
   /* Tokens de superfícies (backgrounds e painéis) */
   --color-surface-light: var(--color-gray-50);
   --color-surface-dark: var(--color-gray-950);
-
   --color-panel-light: var(--color-white);
   --color-panel-dark: var(--color-gray-900);
 
@@ -26,7 +35,7 @@
   --color-surface-hover-light: var(--color-gray-100);
   --color-surface-hover-dark: var(--color-gray-800);
 
-  /* Tokens de feedback (sucesso/erro/estado) */
+  /* Tokens de feedback */
   --color-success-bg: var(--color-green-50);
   --color-success-border: var(--color-green-200);
   --color-success-text: var(--color-green-700);
@@ -44,12 +53,10 @@
   --color-status-online: var(--color-green-500);
 
   /* Tokens de texto semântico */
+  --color-text-dark: #D1D5DB;
   --color-text-default: var(--color-gray-900);
   --color-text-muted: var(--color-gray-600);
-  --color-text-muted-dark: var(--color-gray-400);
   --color-text-label: var(--color-gray-700);
-  --color-text-label-dark: var(--color-gray-300);
-
 }
 
 /* ==========================================
@@ -63,90 +70,97 @@
     border border-border-light dark:border-border-dark
     bg-white dark:bg-gray-800
     rounded-md shadow-sm
-    placeholder-gray-400 dark:placeholder-gray-500
-    focus:outline-none
-    focus:ring-primary-600!
-    focus:border-primary-600!
+    focus:outline-none focus:border-gray-400 dark:focus:border-gray-500
     sm:text-sm
-    text-gray-900 dark:text-white
+    text-gray-900 dark:text-text-dark
+    placeholder-gray-400 dark:placeholder-text-dark/80
     transition-colors;
   }
 
-  /* Texto secundário / descrições */
+  /* Garante cor do texto no tema escuro (valor digitado ou autofill) */
+  .dark .input-base {
+    color: var(--color-text-dark);
+  }
+
+  /* Autofill Reset (Mantido em Vanilla CSS por restrições do Webkit) */
+  .input-base:-webkit-autofill,
+  .input-base:-webkit-autofill:hover,
+  .input-base:-webkit-autofill:focus,
+  .input-base:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+    box-shadow: 0 0 0 30px white inset;
+  }
+  .dark .input-base:-webkit-autofill,
+  .dark .input-base:-webkit-autofill:hover,
+  .dark .input-base:-webkit-autofill:focus,
+  .dark .input-base:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--color-gray-800) inset;
+    box-shadow: 0 0 0 30px var(--color-gray-800) inset;
+    -webkit-text-fill-color: var(--color-text-dark);
+    color: var(--color-text-dark);
+  }
+
+  /* Tipografia Base */
   .text-muted {
-    @apply text-gray-600 dark:text-gray-400;
+    @apply text-gray-600 dark:text-text-dark;
   }
 
-  /* Títulos e headings principais */
   .text-heading {
-    @apply text-gray-900 dark:text-white;
+    @apply text-gray-900 dark:text-text-dark;
   }
 
-  /* Texto auxiliar/caption */
   .text-caption-muted {
-    @apply text-gray-500 dark:text-gray-500;
+    @apply text-gray-500 dark:text-text-dark;
   }
 
-  /* Rótulos de campo de formulário */
   .form-label {
-    @apply block text-sm font-medium text-gray-700 dark:text-gray-300;
+    @apply block text-sm font-medium text-gray-700 dark:text-text-dark;
   }
 
   /* Botão primário padrão */
   .btn-primary {
-    @apply flex justify-center items-center
-    py-2 px-4
-    rounded-md
-    text-sm font-semibold
-    text-white
-    bg-primary-600!
-    hover:bg-primary-700!
-    focus:outline-none
-    focus:ring-2 focus:ring-offset-2 focus:ring-primary-600!
-    disabled:opacity-50
-    disabled:cursor-not-allowed
-    transition-colors
-    cursor-pointer!;
+    @apply flex justify-center items-center py-2 px-4 rounded-md text-sm font-semibold
+    text-white bg-primary-600! hover:bg-primary-700!
+    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600!
+    disabled:opacity-50 disabled:cursor-not-allowed
+    transition-colors cursor-pointer!;
   }
 
+  /* Alertas */
   .alert-success {
     @apply flex items-center gap-3 p-3 rounded-lg border text-sm
-    bg-green-50 border-green-200 text-green-700
-    dark:bg-green-900/10 dark:border-green-800/50 dark:text-green-400;
+    bg-success-bg border-success-border text-success-text
+    dark:bg-success-bg-dark/10 dark:border-success-border-dark/50 dark:text-success-text-dark;
   }
 
   .alert-error {
     @apply flex items-center gap-3 p-3 rounded-lg border text-sm
-    bg-red-50 border-red-200 text-red-700
-    dark:bg-red-900/10 dark:border-red-800/50 dark:text-red-400;
+    bg-error-bg border-error-border text-error-text
+    dark:bg-error-bg-dark/10 dark:border-error-border-dark/50 dark:text-error-text-dark;
   }
 
-  /* Estado de erro de input */
   .input-error {
     @apply border-red-500;
   }
 
-  /* Texto de ações destrutivas (logout, remover, etc.) - base neutra */
+  /* Ações e Ícones */
   .text-danger {
-    @apply text-gray-600 dark:text-gray-400;
+    @apply text-gray-600 dark:text-text-dark;
   }
 
-  /* Hover vermelho para ações destrutivas (usar com group no pai) */
   .text-danger-hover {
     @apply group-hover:text-red-600 dark:group-hover:text-red-600;
   }
 
-  /* Ícones neutros/muted */
   .icon-muted {
-    @apply text-gray-400 dark:text-gray-500;
+    @apply text-gray-400 dark:text-text-dark;
   }
 
-  /* Ícones de ações destrutivas */
   .icon-danger {
-    @apply text-gray-400 dark:text-gray-500 group-hover:text-red-600 dark:group-hover:text-red-600;
+    @apply text-gray-400 dark:text-text-dark group-hover:text-red-600 dark:group-hover:text-red-600;
   }
 
-  /* Badge de status online (sidebar) */
+  /* Status e Indicadores */
   .status-card {
     @apply flex items-center gap-3 p-3 rounded-lg bg-surface-light/50 dark:bg-border-dark/30;
   }
@@ -155,51 +169,48 @@
     @apply w-2 h-2 rounded-full bg-green-500 animate-pulse;
   }
 
-  /* Item de nav ativo (sidebar, profile-sidebar): usar com routerLinkActive.
-   * Mesmo visual do hover: fundo surface-hover + texto primary-600 + barra à esquerda. */
+  /* Navegação (Sidebar e Menus) */
   .nav-item-active {
-    @apply bg-surface-hover-light dark:bg-surface-hover-dark text-primary-600!;
+    @apply bg-surface-hover-light dark:bg-surface-hover-dark text-primary-600! dark:text-text-dark!;
   }
 
-  /* Ícone do item ativo: herda a cor primary (no ativo o ícone acompanha o texto). */
   .nav-item-active .icon-muted {
-    @apply text-primary-600;
+    @apply text-primary-600 dark:text-text-dark;
   }
 
-  /* Barra vertical indicadora de item ativo: usar no filho quando routerLinkActive.isActive */
   .nav-item-active-bar {
     @apply absolute inset-y-1.5 -left-1.5 w-0.5 rounded-full bg-primary-600;
   }
 
-  /* Hover do link de nav (mesmo look do ativo, sem a barra): usar junto com .nav-item-active no mesmo elemento. */
   .nav-link {
-    @apply hover:bg-surface-hover-light dark:hover:bg-surface-hover-dark hover:text-primary-600 dark:hover:text-primary-600;
+    @apply hover:bg-surface-hover-light dark:hover:bg-surface-hover-dark
+    hover:text-primary-600 dark:text-text-dark dark:hover:text-text-dark;
   }
 
   .nav-link .icon-muted {
-    @apply group-hover:text-primary-600 dark:group-hover:text-primary-600;
+    @apply group-hover:text-primary-600 dark:text-text-dark dark:group-hover:text-text-dark;
   }
 
-  /* Botão só-ícone (header: menu, tema, etc.): hover de superfície, sem mudar texto. */
   .btn-icon {
     @apply hover:bg-surface-hover-light dark:hover:bg-surface-hover-dark transition-colors;
   }
 
-  /* Conteúdo de item de menu (ex.: mat-menu): ícone e texto em primary no hover. Pai deve ter .group. */
   .menu-item-hover .icon-muted,
   .menu-item-hover .text-muted {
     @apply group-hover:text-primary-600 dark:group-hover:text-primary-600;
   }
-}
 
-/* ==========================================
-   Overrides Globais de Terceiros
-   ========================================== */
-@layer components {
-
-  /* Padroniza hover e borda arredondada de itens de menu do Angular Material */
-  .mat-mdc-menu-item {
-    @apply rounded-md! text-gray-600 dark:text-gray-400 hover:bg-surface-hover-light! dark:hover:bg-surface-hover-dark! transition-colors duration-200!;
+  .link-primary {
+    @apply font-semibold text-primary-500 hover:text-primary-600 transition-colors;
   }
 
+  /* Utilitários Visuais Específicos */
+  .login-overlay-gradient {
+    background: linear-gradient(to bottom right, var(--color-primary-600), var(--color-primary-700));
+  }
+
+  /* Overrides Angular Material */
+  .mat-mdc-menu-item {
+    @apply rounded-md! text-gray-600 dark:text-text-dark hover:bg-surface-hover-light! dark:hover:bg-surface-hover-dark! transition-colors duration-200!;
+  }
 }

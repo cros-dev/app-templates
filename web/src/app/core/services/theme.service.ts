@@ -16,6 +16,8 @@ export class ThemeService {
   darkMode = signal<boolean>(this.getInitialTheme());
 
   constructor() {
+    /** Aplica tema imediatamente para evitar flash (rotas sem layout, ex.: login). */
+    this.applyTheme(this.darkMode());
     /**
      * Efeito que reage a mudanças no Signal darkMode para atualizar o DOM e o armazenamento.
      */

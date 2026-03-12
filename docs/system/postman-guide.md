@@ -30,6 +30,17 @@ Use variáveis para tokens e URLs:
 | `django_access_token` | `eyJhbGci...` | Token JWT de acesso |
 | `django_refresh_token` | `eyJhbGci...` | Token JWT de atualização |
 
+## Corpo da requisição de Login
+
+O endpoint `POST Login` aceita JSON com **email** e **password** (ambos obrigatórios):
+
+```json
+{
+  "email": "usuario@example.com",
+  "password": "sua_senha"
+}
+```
+
 ## Automação de Token (Script)
 
 Adicione o seguinte script na aba **Tests** da requisição `POST Login` para capturar os tokens automaticamente:

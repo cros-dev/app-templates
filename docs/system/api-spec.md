@@ -4,7 +4,7 @@ Este documento descreve a especificação de endpoints da API.
 
 ## Autenticação
 
-- `POST /api/token/` - Login (access/refresh)
+- `POST /api/token/` - Login (access/refresh). Corpo: `email` e `password` (obrigatórios).
 - `POST /api/token/refresh/` - Renovação do access token
 - `POST /api/token/verify/` - Verificação de token
 

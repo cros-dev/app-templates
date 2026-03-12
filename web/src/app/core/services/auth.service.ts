@@ -29,7 +29,7 @@ export class AuthService {
 
   /**
    * Autentica o usuário na API e inicializa a sessão local.
-   * @param credentials - Objeto contendo credenciais de acesso (username e password).
+   * @param credentials - Objeto com email e password (corpo esperado pelo POST /api/token/).
    * @returns Um Observable com a resposta da API contendo os tokens JWT.
    */
   login(credentials: Record<string, string>): Observable<AuthResponse> {

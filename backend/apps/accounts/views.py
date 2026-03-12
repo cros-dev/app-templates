@@ -16,7 +16,11 @@ from rest_framework_simplejwt.views import (
 )
 from drf_spectacular.utils import extend_schema, extend_schema_view
 
-from .serializers import UserSerializer, UserProfileSerializer
+from .serializers import (
+    UserSerializer,
+    UserProfileSerializer,
+    CustomTokenObtainPairSerializer,
+)
 
 User = get_user_model()
 
@@ -30,17 +34,17 @@ User = get_user_model()
         tags=["Autenticação"],
         summary="Obter par de tokens",
         description=(
-            "Autentica com **username** e **password** e retorna um par de tokens JWT. "
-            "Espera um JSON com `username` e `password`. Retorna `access` (token de acesso, "
-            "curta duração) e `refresh` (token de renovação, maior duração). Use o `access` "
-            "no header `Authorization: Bearer <access>` nas requisições autenticadas. "
-            "Use o `refresh` no endpoint de renovação para obter um novo par de tokens."
+            "Autentica com **email** e **password** e retorna um par de tokens JWT. "
+            "Espera um JSON com `email` e `password`. Retorna `access` (token de acesso) e "
+            "`refresh` (token de renovação). Use o `access` no header "
+            "`Authorization: Bearer <access>` nas requisições autenticadas."
         ),
     )
 )
 class CustomTokenObtainPairView(TokenObtainPairView):
-    """View customizada para login JWT com metadados OpenAPI."""
-    pass
+    """View customizada para login JWT exclusivamente por email."""
+
+    serializer_class = CustomTokenObtainPairSerializer
 
 
 @extend_schema_view(

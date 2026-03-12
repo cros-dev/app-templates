@@ -2,6 +2,18 @@
 
 Este arquivo registra mudanças notáveis no template.
 
+## [1.4.0] - 2026-03-12
+
+### Adicionado
+- **Login exclusivamente por email:** endpoint `POST /api/token/` aceita apenas **email** e **password** no corpo JSON. Serializer `CustomTokenObtainPairSerializer` resolve usuário por email (case-insensitive) e valida a senha; o campo `username` foi removido da API de login.
+- Testes em `test_auth.py`: login por email (sucesso, senha incorreta, email inexistente, campos faltando).
+
+### Melhorado
+- Documentação OpenAPI da view de login atualizada para email + password.
+- **docs/system/api-spec.md:** login com email e password (obrigatórios).
+- **docs/system/postman-guide.md:** corpo do Login apenas com email e password.
+- **ARCHITECTURE.md:** endpoint de login descrito como email + password.
+
 ## [1.3.0] - 2026-03-11
 
 ### Adicionado
