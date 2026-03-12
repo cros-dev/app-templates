@@ -1,59 +1,56 @@
-# Web
+# Web (Angular)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.3.
+Frontend do boilerplate monorepo. Aplicação Angular que consome a API REST do backend (`/api/`).
 
-## Development server
+## Estrutura
 
-To start a local development server, run:
+O projeto segue a estrutura padrão do Angular CLI. Principais pastas:
+
+- `src/app/features/` – Módulos por funcionalidade (auth, dashboard, profile, etc.)
+- `src/app/core/` – Serviços, guards, interceptors e modelos compartilhados
+- `src/app/layouts/` – Layouts (header, sidebar, main-layout)
+- `src/environments/` – Configurações por ambiente (API base URL, etc.)
+
+## Pré-requisitos
+
+- Node.js 18+
+- npm
+
+## Desenvolvimento
 
 ```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Acesse `http://localhost:4200/`. O backend deve estar rodando em `http://localhost:8000` (ou configure a URL da API em `src/environments/`).
 
-## Code scaffolding
+## Comandos úteis
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+| Comando     | Descrição                    |
+|------------|------------------------------|
+| `ng serve` | Servidor de desenvolvimento  |
+| `ng build` | Build de produção (`dist/`)  |
+| `ng test`  | Testes unitários (Vitest)     |
+| `ng e2e`   | Testes end-to-end (se configurado) |
 
-```bash
-ng generate component component-name
-```
+Para mais comandos: `ng help` ou [Angular CLI](https://angular.dev/tools/cli).
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Integração com a API
 
-```bash
-ng generate --help
-```
+- A autenticação usa JWT (login em `/api/token/`, refresh em `/api/token/refresh/`).
+- O interceptor de auth envia o token no header `Authorization: Bearer <token>`.
+- A URL base da API é configurada em `src/environments/environment*.ts`.
 
-## Building
+## Documentação
 
-To build the project run:
+- **Monorepo:** [README na raiz](../README.md)
+- **Backend:** [backend/README.md](../backend/README.md) · Swagger: `http://localhost:8000/api/docs/` (com backend rodando)
+- **Especificação da API:** [docs/system/api-spec.md](../docs/system/api-spec.md) · [docs/system/data-model.md](../docs/system/data-model.md)
+- **Docs compartilhadas:** [docs/README.md](../docs/README.md)
 
-```bash
-ng build
-```
+## Stack
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Angular 21
+- Angular Material (conforme projeto)
+- Vitest para testes unitários

@@ -2,11 +2,34 @@
 
 Este arquivo registra mudanças notáveis no template.
 
+## [1.3.0] - 2026-03-11
+
+### Adicionado
+- **OpenAPI / Swagger (drf-spectacular):** documentação interativa em `/api/docs/` e schema em `/api/schema/`.
+- `drf-spectacular` em `requirements.txt` e em `INSTALLED_APPS`; `DEFAULT_SCHEMA_CLASS` e `SPECTACULAR_SETTINGS` em `settings.py` (incluindo `TAGS` para ordem: Autenticação, depois Contas).
+- Views customizadas de autenticação JWT com `@extend_schema_view`: `CustomTokenObtainPairView`, `CustomTokenRefreshView`, `CustomTokenVerifyView` (tag **Autenticação**; summary e description por método).
+- `@extend_schema_view` em `UserProfileView` (get, put, patch) e `UserDetailView` (get) com tag **Contas**, summaries e descriptions.
+- Rotas `/api/schema/` e `/api/docs/` em `config/urls.py`; rotas JWT apontando para as views customizadas.
+
+### Melhorado
+- **README.md:** seção Endpoints passa a referenciar [docs/system/api-spec.md](../docs/system/api-spec.md) e [docs/system/data-model.md](../docs/system/data-model.md); seção Documentação agrupada (deste pacote / compartilhada com links para api-spec, data-model, business-rules, postman-guide, decisions).
+- **ARCHITECTURE.md:** parágrafo inicial **Stack da API** explicitando Django + DRF, Simple JWT e drf-spectacular; endpoints de contas corrigidos para `/api/accounts/` (em vez de `/api/users/`).
+- **docs/system/api-spec.md:** seção Contas (usuários e perfil) com paths `/api/accounts/profile/` e `/api/accounts/{id}/`; incluído PUT além de PATCH para perfil.
+- **Testes:** `test_views.py` e `test_auth.py` atualizados para usar `/api/accounts/` nas URLs de perfil e detalhe de usuário.
+
+## [1.2.0] - 2026-03-11
+
+### Removido
+- `docker-compose.yml` e `docker-compose.local.yml` do backend. Deploy e orquestração passam a ser responsabilidade da raiz do monorepo (compose na raiz, a ser implementado).
+
+### Melhorado
+- README, ARCHITECTURE e Makefile atualizados: backend mantém apenas Dockerfile e docker-entrypoint.sh; referências a compose removidas ou direcionadas à raiz.
+
 ## [1.1.0] - 2026-01-26
 
 ### Adicionado
-- `docker-compose.local.yml` para desenvolvimento local (PostgreSQL e Redis incluídos).
-- `docker-compose.yml` atualizado para produção (PostgreSQL externo, bind mounts customizáveis).
+- `docker-compose.local.yml` para desenvolvimento local (PostgreSQL e Redis incluídos) — posteriormente removido em 1.2.0.
+- `docker-compose.yml` atualizado para produção (PostgreSQL externo, bind mounts customizáveis) — posteriormente removido em 1.2.0.
 - `docker-entrypoint.sh` melhorado com timeout de 60s, `collectstatic` e lógica aprimorada de superusuário.
 - `Dockerfile` atualizado para usar Gunicorn como CMD padrão.
 - `requirements.txt` com `gunicorn` e `whitenoise` adicionados.

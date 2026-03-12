@@ -2,7 +2,7 @@
 
 Este documento define padrões mínimos para contribuir com projetos criados a partir do template.
 
-**Para detalhes técnicos das ferramentas de qualidade, veja [`../QUALITY.md`](../QUALITY.md).**
+**Para detalhes técnicos das ferramentas de qualidade do backend, veja [backend/QUALITY.md](../backend/QUALITY.md).**
 
 ## Documentação
 
@@ -43,6 +43,7 @@ Seguimos o padrão **Conventional Commits** adaptado para o contexto do projeto.
 O escopo indica a área do projeto afetada:
 
 - `backend` - Backend Django
+- `web` - Frontend Angular
 - `docs` - Documentação
 - `config` - Configurações gerais
 

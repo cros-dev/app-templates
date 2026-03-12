@@ -108,6 +108,6 @@ class JWTAuthenticationTestCase(TestCase):
 
         # Faz requisição autenticada
         self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {access_token}")
-        response = self.client.get("/api/users/profile/")
+        response = self.client.get("/api/accounts/profile/")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["username"], "testuser")

@@ -1,4 +1,4 @@
-.PHONY: help install migrate makemigrations run shell test clean docker-up docker-up-local docker-down docker-down-local docker-build docker-build-local docker-logs docker-logs-local superuser collectstatic format lint check test-cov quality
+.PHONY: help install migrate makemigrations run shell test clean superuser collectstatic format lint check test-cov quality
 
 help:
 	@echo "Comandos disponíveis:"
@@ -18,16 +18,6 @@ help:
 	@echo "  make lint             - Verificar código com flake8"
 	@echo "  make check            - Executar format + lint + test-cov"
 	@echo "  make quality          - Alias para check"
-	@echo ""
-	@echo "Docker:"
-	@echo "  make docker-up        - Deploy: Iniciar containers (Homol/Prod)"
-	@echo "  make docker-up-local  - Local: Iniciar containers (Docker)"
-	@echo "  make docker-down      - Deploy: Parar containers (Homol/Prod)"
-	@echo "  make docker-down-local - Local: Parar containers (Docker)"
-	@echo "  make docker-build     - Deploy: Construir imagens (Homol/Prod)"
-	@echo "  make docker-build-local - Local: Construir imagens (Docker)"
-	@echo "  make docker-logs      - Deploy: Ver logs (Homol/Prod)"
-	@echo "  make docker-logs-local - Local: Ver logs (Docker)"
 
 install:
 	pip install -r requirements.txt
@@ -76,27 +66,3 @@ check: format lint test-cov
 	@echo "Verificação de qualidade concluída!"
 
 quality: check
-
-docker-up:
-	docker compose up -d
-
-docker-up-local:
-	docker compose -f docker-compose.local.yml up -d
-
-docker-down:
-	docker compose down
-
-docker-down-local:
-	docker compose -f docker-compose.local.yml down
-
-docker-build:
-	docker compose build
-
-docker-build-local:
-	docker compose -f docker-compose.local.yml build
-
-docker-logs:
-	docker compose logs -f
-
-docker-logs-local:
-	docker compose -f docker-compose.local.yml logs -f

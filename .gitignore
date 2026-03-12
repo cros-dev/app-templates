@@ -1,0 +1,23 @@
+# =========================================================
+# Raiz do monorepo
+# backend/ e web/ possuem seus próprios .gitignore
+# =========================================================
+
+# Ambiente
+.env
+.env.local
+.env.*.local
+
+# IDE / Editor
+.idea/
+*.swp
+*.swo
+*~
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs e cache na raiz (se algum script rodar aqui)
+*.log
+.cache/

@@ -8,11 +8,11 @@ Este documento descreve a especificação de endpoints da API.
 - `POST /api/token/refresh/` - Renovação do access token
 - `POST /api/token/verify/` - Verificação de token
 
-## Usuários
+## Contas (usuários e perfil)
 
-- `GET /api/users/profile/` - Perfil do usuário logado
-- `PATCH /api/users/profile/` - Atualização do perfil logado
-- `GET /api/users/{id}/` - Detalhes de usuário (admin)
+- `GET /api/accounts/profile/` - Perfil do usuário autenticado
+- `PUT/PATCH /api/accounts/profile/` - Atualização do perfil
+- `GET /api/accounts/{id}/` - Detalhes de um usuário por ID
 
 ---
 

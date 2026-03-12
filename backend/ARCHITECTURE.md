@@ -2,6 +2,8 @@
 
 Este documento descreve o que é genérico (pronto para uso) e o que precisa ser adaptado.
 
+**Stack da API:** Django + **Django REST Framework (DRF)** para a camada REST (serializers, views, autenticação, permissões). Autenticação via **Simple JWT**; documentação OpenAPI via **drf-spectacular**. O backend é exclusivamente uma API (sem templates server-side).
+
 ## Genérico - Pronto para Uso
 
 Estes componentes podem ser usados sem modificações:
@@ -11,7 +13,7 @@ Estes componentes podem ser usados sem modificações:
 **apps.accounts**
 - Serializers genéricos para User do Django (`UserSerializer`, `UserProfileSerializer`)
 - Views para perfil e detalhes de usuário
-- Endpoints: `/api/users/profile/` e `/api/users/<id>/`
+- Endpoints: `/api/accounts/profile/` e `/api/accounts/<id>/`
 - Configuração do Django Admin para User
 
 **apps.core**
@@ -37,7 +39,7 @@ Estes componentes podem ser usados sem modificações:
 ### Configurações
 
 **settings.py**
-- Carrega automaticamente o arquivo **`.env`**. Em ambientes Docker, as variáveis injetadas pelo Compose têm prioridade.
+- Carrega automaticamente o arquivo **`.env`**. Em ambientes Docker, as variáveis injetadas pelo orquestrador (compose na raiz) têm prioridade.
 - **Banco de Dados**: Prioriza PostgreSQL se as variáveis estiverem definidas; caso contrário, usa SQLite em modo DEBUG.
 - **Segurança**: HTTPS forçado em produção via `SECURE_SSL_REDIRECT` (configurável via env var).
 - **Cache**: Usa Redis dinamicamente se `REDIS_URL` estiver definido, senão LocMemCache.
@@ -48,18 +50,15 @@ Estes componentes podem ser usados sem modificações:
 
 **Ambientes**
 - **Execução Nativa**: Uso de **`.env`** (SQLite/Cache Local) via `python manage.py runserver`.
-- **Execução Docker Local**: Uso de **`.env.local`** (Postgres/Redis) via `docker-compose.local.yml`.
-- **Deploy (Homol/Prod)**: Uso de **`.env`** (Postgres Externo/Nginx) via `docker-compose.yml`.
+- **Deploy**: Orquestração (compose, etc.) fica na **raiz do monorepo**; o backend expõe apenas imagem e entrypoint.
 
-**Docker**
+**Docker (no backend)**
 - `Dockerfile` configurado com Gunicorn
-- `docker-compose.yml` para produção e homologação (PostgreSQL externo, Redis incluído, bind mounts customizáveis para static/media)
-- `docker-compose.local.yml` para desenvolvimento local (PostgreSQL e Redis incluídos)
 - `docker-entrypoint.sh` com timeout, migrate, collectstatic e criação de superusuário
+- Compose e deploy unificados ficam na raiz do repositório (padrão do boilerplate)
 
 **Makefile**
-- Comandos úteis para desenvolvimento e Docker
-- Comandos separados para desenvolvimento local (`-local`) e produção
+- Comandos para desenvolvimento e qualidade de código (format, lint, test-cov)
 
 **Qualidade de código**
 - Configurações de `black`, `flake8`, `pytest` e `coverage`
@@ -205,4 +204,4 @@ apps/
 - **Autenticação**: Por padrão, todas as views requerem autenticação JWT
 - **Paginação**: Padrão de 20 itens por página
 - **Cache**: LocMemCache por padrão, Redis dinâmico se `REDIS_URL` estiver definido
-- **Docker**: Use `docker-compose.local.yml` para ambiente local e `docker-compose.yml` para deploy (Homol/Prod)
+- **Docker**: Build com `docker build -t backend .`; deploy/orquestração na raiz do monorepo

@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
+    "drf_spectacular",
     "corsheaders",
     "django_filters",
     # Apps locais
@@ -181,6 +182,21 @@ REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 20,
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+# =========================================================
+# OPENAPI / SWAGGER (drf-spectacular)
+# =========================================================
+SPECTACULAR_SETTINGS = {
+    "TITLE": "API",
+    "DESCRIPTION": "Documentação OpenAPI da API REST.",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "TAGS": [
+        {"name": "Autenticação", "description": "Login, refresh e verificação de token JWT."},
+        {"name": "Contas", "description": "Perfil e usuários."},
+    ],
 }
 
 # =========================================================

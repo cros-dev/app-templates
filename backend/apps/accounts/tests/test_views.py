@@ -21,14 +21,14 @@ class UserProfileViewTestCase(TestCase):
         )
 
     def test_get_profile_requires_authentication(self):
-        """Testa se GET /api/users/profile/ requer autenticação."""
-        response = self.client.get("/api/users/profile/")
+        """Testa se GET /api/accounts/profile/ requer autenticação."""
+        response = self.client.get("/api/accounts/profile/")
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_get_profile_authenticated(self):
-        """Testa GET /api/users/profile/ com autenticação."""
+        """Testa GET /api/accounts/profile/ com autenticação."""
         self.client.force_authenticate(user=self.user)
-        response = self.client.get("/api/users/profile/")
+        response = self.client.get("/api/accounts/profile/")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["username"], "testuser")
 
@@ -36,7 +36,7 @@ class UserProfileViewTestCase(TestCase):
         """Testa atualização de perfil com autenticação."""
         self.client.force_authenticate(user=self.user)
         response = self.client.patch(
-            "/api/users/profile/",
+            "/api/accounts/profile/",
             {"email": "updated@example.com", "first_name": "Updated"},
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -60,13 +60,13 @@ class UserDetailViewTestCase(TestCase):
         )
 
     def test_get_user_detail_requires_authentication(self):
-        """Testa se GET /api/users/<id>/ requer autenticação."""
-        response = self.client.get(f"/api/users/{self.user.id}/")
+        """Testa se GET /api/accounts/<id>/ requer autenticação."""
+        response = self.client.get(f"/api/accounts/{self.user.id}/")
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_get_user_detail_authenticated(self):
-        """Testa GET /api/users/<id>/ com autenticação."""
+        """Testa GET /api/accounts/<id>/ com autenticação."""
         self.client.force_authenticate(user=self.user)
-        response = self.client.get(f"/api/users/{self.other_user.id}/")
+        response = self.client.get(f"/api/accounts/{self.other_user.id}/")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["username"], "otheruser")

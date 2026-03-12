@@ -1,6 +1,6 @@
-# Documentação Técnica - Template Backend
+# Documentação Técnica - Monorepo
 
-Esta pasta contém documentação técnica base para projetos criados a partir do template.
+Esta pasta contém documentação técnica **compartilhada** para o monorepo (backend + web). Projetos criados a partir deste boilerplate podem adaptar a estrutura conforme [backend/TEMPLATE.md](../backend/TEMPLATE.md).
 
 ## Estrutura
 
@@ -52,11 +52,16 @@ docs/product/
 
 **Regra:** Cards que afetam múltiplas plataformas vão em `backlog-shared.md`. Cards específicos de uma plataforma vão em `backlog-{plataforma}.md`.
 
-## Documentação por Plataforma
+## Navegação rápida (system/)
 
-Documentação técnica específica permanece na raiz do backend:
+Especificação e padrões do sistema: [api-spec.md](system/api-spec.md) (endpoints) · [data-model.md](system/data-model.md) (modelo de dados) · [business-rules.md](system/business-rules.md) (regras de negócio) · [postman-guide.md](system/postman-guide.md) (Postman).
 
-- **Backend:** [`../ARCHITECTURE.md`](../ARCHITECTURE.md) | [`../QUALITY.md`](../QUALITY.md)
+## Documentação por plataforma
+
+Documentação técnica específica fica em cada pacote:
+
+- **Backend:** [backend/ARCHITECTURE.md](../backend/ARCHITECTURE.md) | [backend/QUALITY.md](../backend/QUALITY.md)
+- **Web:** [web/README.md](../web/README.md) | [web/ARCHITETURE.md](../web/ARCHITETURE.md) (se existir)
 
 ## Fonte da Verdade
 
