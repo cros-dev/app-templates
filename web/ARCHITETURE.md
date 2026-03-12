@@ -72,9 +72,17 @@ void router.navigate(['/dashboard']);
 - **Built-in Control Flow**: Obrigatório o uso de `@if`, `@for`, `@switch`.
 - **Tailwind CSS 4.0 Postfix**: O modificador de importância deve ser utilizado exclusivamente como sufixo (ex: `rounded-xl!`).
 - **Shorthands modernos** devem ser preferidos (`shrink-0`, `min-w-45`, etc).
-- **Centralização de estilos reutilizáveis**: qualquer padrão visual compartilhado (inputs, botões, alerts, textos, badges de status, ícones) deve ser definido em `src/styles/theme.css` como utilitário (`@layer components`) e consumido apenas via classes utilitárias nos templates.
+- **Centralização de estilos reutilizáveis**: qualquer padrão visual compartilhado (inputs, botões, alerts, textos, badges de status, ícones, hovers de nav e controles) deve ser definido em `src/styles/theme.css` como utilitário (`@layer components`) e consumido apenas via classes utilitárias nos templates.
 
-### 6.1. Tipografia e Hierarquia de Texto
+### 6.1. Navegação e controles (theme.css)
+
+Padrões de hover e estado ativo devem vir do theme; não duplicar em componentes.
+
+- **Links de nav (sidebar, profile-sidebar)**: usar `.nav-link` no elemento; estado ativo com `routerLinkActive="nav-item-active"` e barra com `.nav-item-active-bar` quando `routerLinkActive.isActive`. Ícone com `.icon-muted` (hover e ativo herdados de `.nav-link` e `.nav-item-active`).
+- **Botão só-ícone (header: menu, tema)**: usar `.btn-icon` (hover de superfície, sem mudar cor do texto).
+- **Itens de menu dropdown (ex.: mat-menu)**: conteúdo (ícone + texto) em primary no hover usando `.menu-item-hover` no pai com `.group`; filhos `.icon-muted` e `.text-muted` recebem o hover do theme.
+
+### 6.2. Tipografia e Hierarquia de Texto
 
 - **Títulos de página (h1/h2)**:
   - Padrão: `text-2xl font-semibold text-heading` (ex.: nome do utilizador em `Profile`).
@@ -82,6 +90,7 @@ void router.navigate(['/dashboard']);
 - **Texto de navegação**:
   - Itens principais (sidebar, navegação secundária): `text-sm font-medium text-muted`.
   - Títulos de grupo na sidebar: `text-[10px] font-semibold text-caption-muted uppercase`.
+- **Títulos de grupo na sidebar**: removido o rótulo "Menu Principal"; grupos são apenas separados por dividers (ver Layout).
 - **Labels de formulário**:
   - Sempre utilizar `form-label` como base, opcionalmente com `mb-1.5` para espaçamento.
 - **Texto auxiliar / descrições**:
@@ -126,7 +135,7 @@ Obrigatório o uso de comentários para separar seções lógicas:
 
 - **Isolamento de Interfaces**: Proibida a definição de interfaces dentro de arquivos `.ts` de componentes.
 - **Localização de Modelos**:
-  - Modelos globais → `core/models/`
+  - Modelos globais → `core/models/` (ex.: `layout.model.ts`: `MenuItem`, `MenuGroup` para sidebar; `disabled?: boolean` = item placeholder sem navegação).
   - Modelos locais → `features/[feature]/models/`
 
 ---
@@ -221,8 +230,8 @@ RO3 --> Page[Public Profile Page]
 
 ### Responsividade do Layout
 
-- **Header**: fixo no topo da aplicação.
-- **Sidebar**: navegação lateral colapsável, com suporte a overlay em telas pequenas.
+- **Header**: fixo no topo; sem sombra (unificado com o body); botões de menu e tema com `.btn-icon`; trigger do user menu sem fundo/contorno no hover; itens do mat-menu (Meu Perfil, Sair) com `.menu-item-hover` para hover do conteúdo.
+- **Sidebar**: navegação lateral colapsável, com suporte a overlay em telas pequenas. Menu escalável via `menuGroups: MenuGroup[]` (cada grupo = array de `MenuItem`); divider entre grupos (nunca após o último grupo); spacer antes do bloco "Sistema Online" para manter grupos no topo. Itens com `disabled: true` são exibidos como botão (não navegam). Estado ativo = `.nav-item-active` + barra `.nav-item-active-bar` (mesmo padrão do profile-sidebar). Espaçamento simétrico em torno dos dividers (`pb-4` / `pt-4`).
 - **Main**: área de conteúdo adaptativa com padding responsivo e largura controlada (`max-w-7xl`).
 
 ---

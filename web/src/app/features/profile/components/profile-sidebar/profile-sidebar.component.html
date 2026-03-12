@@ -2,12 +2,12 @@
 <nav class="flex flex-col space-y-0.5">
   <a
     routerLink="public"
-    routerLinkActive="bg-surface-hover-light dark:bg-surface-hover-dark text-primary-600!"
+    routerLinkActive="nav-item-active"
     #rla="routerLinkActive"
-    class="relative flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-muted hover:bg-surface-hover-light dark:hover:bg-surface-hover-dark rounded-lg transition-all cursor-pointer!"
+    class="nav-link group relative flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-muted rounded-lg transition-all cursor-pointer!"
   >
     @if (rla.isActive) {
-      <span class="absolute inset-y-1.5 -left-1.5 w-0.5 rounded-full bg-primary-600"></span>
+      <span class="nav-item-active-bar"></span>
     }
     <svg
       class="w-4 h-4 shrink-0"

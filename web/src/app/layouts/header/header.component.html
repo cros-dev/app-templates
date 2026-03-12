@@ -1,5 +1,5 @@
 <!-- Header -->
-<header class="h-16 bg-panel-light dark:bg-panel-dark border-b border-border-light dark:border-border-dark flex items-center justify-between px-4 shadow-sm transition-colors duration-300">
+<header class="h-16 bg-panel-light dark:bg-panel-dark border-b border-border-light dark:border-border-dark flex items-center justify-between px-4 transition-colors duration-300">
 
   <!-- Brand and navigation trigger -->
   <div class="flex items-center gap-4">
@@ -7,7 +7,7 @@
     <!-- Menu button -->
     <button
       (click)="toggleMenu()"
-      class="p-2 rounded-md hover:bg-surface-hover-light dark:hover:bg-surface-hover-dark transition-colors text-muted focus:outline-none cursor-pointer!"
+      class="btn-icon p-2 rounded-md text-muted focus:outline-none cursor-pointer!"
     >
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -30,7 +30,7 @@
     <!-- Theme toggle -->
     <button
       (click)="themeService.toggleTheme()"
-      class="p-2 rounded-lg text-muted hover:bg-surface-hover-light dark:hover:bg-surface-hover-dark transition-colors cursor-pointer! focus:outline-none"
+      class="btn-icon p-2 rounded-lg text-muted cursor-pointer! focus:outline-none"
       title="Alternar Tema"
     >
       @if (themeService.darkMode()) {
@@ -50,10 +50,10 @@
     <!-- User menu trigger -->
     <button
       [matMenuTriggerFor]="userMenu"
-      class="flex items-center gap-2 p-1 rounded-lg hover:bg-surface-hover-light dark:hover:bg-surface-hover-dark transition-all group focus:outline-none cursor-pointer!"
+      class="flex items-center gap-2 p-1 rounded-lg focus:outline-none cursor-pointer! group"
     >
 
-      <div class="w-9 h-9 rounded-full bg-primary-600 flex items-center justify-center text-white text-sm font-bold shadow-sm group-hover:ring-4 group-hover:ring-primary-50 dark:group-hover:ring-primary-700/30 transition-all">
+      <div class="w-9 h-9 rounded-full bg-primary-600 flex items-center justify-center text-white text-sm font-bold shadow-sm">
         {{ user()?.first_name?.charAt(0) || 'U' }}{{ user()?.last_name?.charAt(0) || '' }}
       </div>
 
@@ -94,13 +94,13 @@
         <button
           mat-menu-item
           routerLink="/profile"
-          class="text-sm! transition-colors group cursor-pointer!"
+          class="menu-item-hover text-sm! transition-colors group cursor-pointer!"
         >
           <div class="flex items-center gap-3">
-            <svg class="w-4 h-4 icon-muted group-hover:text-primary-600 dark:group-hover:text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 icon-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
-            <span class="text-muted group-hover:text-primary-600 dark:group-hover:text-primary-600">Meu Perfil</span>
+            <span class="text-muted">Meu Perfil</span>
           </div>
         </button>
 

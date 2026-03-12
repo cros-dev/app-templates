@@ -155,6 +155,41 @@
     @apply w-2 h-2 rounded-full bg-green-500 animate-pulse;
   }
 
+  /* Item de nav ativo (sidebar, profile-sidebar): usar com routerLinkActive.
+   * Mesmo visual do hover: fundo surface-hover + texto primary-600 + barra à esquerda. */
+  .nav-item-active {
+    @apply bg-surface-hover-light dark:bg-surface-hover-dark text-primary-600!;
+  }
+
+  /* Ícone do item ativo: herda a cor primary (no ativo o ícone acompanha o texto). */
+  .nav-item-active .icon-muted {
+    @apply text-primary-600;
+  }
+
+  /* Barra vertical indicadora de item ativo: usar no filho quando routerLinkActive.isActive */
+  .nav-item-active-bar {
+    @apply absolute inset-y-1.5 -left-1.5 w-0.5 rounded-full bg-primary-600;
+  }
+
+  /* Hover do link de nav (mesmo look do ativo, sem a barra): usar junto com .nav-item-active no mesmo elemento. */
+  .nav-link {
+    @apply hover:bg-surface-hover-light dark:hover:bg-surface-hover-dark hover:text-primary-600 dark:hover:text-primary-600;
+  }
+
+  .nav-link .icon-muted {
+    @apply group-hover:text-primary-600 dark:group-hover:text-primary-600;
+  }
+
+  /* Botão só-ícone (header: menu, tema, etc.): hover de superfície, sem mudar texto. */
+  .btn-icon {
+    @apply hover:bg-surface-hover-light dark:hover:bg-surface-hover-dark transition-colors;
+  }
+
+  /* Conteúdo de item de menu (ex.: mat-menu): ícone e texto em primary no hover. Pai deve ter .group. */
+  .menu-item-hover .icon-muted,
+  .menu-item-hover .text-muted {
+    @apply group-hover:text-primary-600 dark:group-hover:text-primary-600;
+  }
 }
 
 /* ==========================================
