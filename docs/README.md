@@ -15,6 +15,10 @@ docs/
 │   ├── data-model.md       # Modelo de dados (base)
 │   ├── business-rules.md   # Regras de negócio (base)
 │   └── postman-guide.md    # Padrão de uso do Postman
+├── deploy/                 # Deploy e execução (local e Docker)
+│   ├── README.md           # Índice e visão geral
+│   ├── local.md            # Execução nativa (runserver, ng serve)
+│   └── docker.md           # Docker Compose (docker-compose.dev.yml)
 ├── governance/             # Papéis e responsabilidades
 │   └── roles.md            # Papéis funcionais (negócio)
 ├── decisions/              # Registro de decisões (ADR)
@@ -52,9 +56,10 @@ docs/product/
 
 **Regra:** Cards que afetam múltiplas plataformas vão em `backlog-shared.md`. Cards específicos de uma plataforma vão em `backlog-{plataforma}.md`.
 
-## Navegação rápida (system/)
+## Navegação rápida
 
-Especificação e padrões do sistema: [api-spec.md](system/api-spec.md) (endpoints) · [data-model.md](system/data-model.md) (modelo de dados) · [business-rules.md](system/business-rules.md) (regras de negócio) · [postman-guide.md](system/postman-guide.md) (Postman).
+- **Deploy e execução:** [deploy/README.md](deploy/README.md) (local e Docker).
+- **Sistema (API e dados):** [api-spec.md](system/api-spec.md) (endpoints) · [data-model.md](system/data-model.md) (modelo de dados) · [business-rules.md](system/business-rules.md) (regras de negócio) · [postman-guide.md](system/postman-guide.md) (Postman).
 
 ## Documentação por plataforma
 

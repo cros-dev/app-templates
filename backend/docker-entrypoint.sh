@@ -25,22 +25,7 @@ python manage.py migrate --noinput
 echo "Coletando arquivos estáticos..."
 python manage.py collectstatic --noinput
 
-if [ -n "$DJANGO_SUPERUSER_USERNAME" ] && [ -n "$DJANGO_SUPERUSER_EMAIL" ] && [ -n "$DJANGO_SUPERUSER_PASSWORD" ]; then
-  echo "Verificando superusuário..."
-  python manage.py shell << EOF
-from django.contrib.auth import get_user_model
-User = get_user_model()
-
-username = "$DJANGO_SUPERUSER_USERNAME"
-email = "$DJANGO_SUPERUSER_EMAIL"
-password = "$DJANGO_SUPERUSER_PASSWORD"
-
-if not User.objects.filter(username=username).exists():
-    User.objects.create_superuser(username, email, password)
-    print("Superusuário criado com sucesso!")
-else:
-    print("Superusuário já existe.")
-EOF
-fi
+echo "Verificando superusuário (create_admin_user)..."
+python manage.py create_admin_user
 
 exec "$@"

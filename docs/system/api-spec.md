@@ -2,11 +2,16 @@
 
 Este documento descreve a especificação de endpoints da API.
 
+## Saúde e infraestrutura
+
+- `GET /api/health/` - Health/readiness (retorna `{"status": "ok"}`). Sem autenticação.
+
 ## Autenticação
 
 - `POST /api/token/` - Login (access/refresh). Corpo: `email` e `password` (obrigatórios).
 - `POST /api/token/refresh/` - Renovação do access token
 - `POST /api/token/verify/` - Verificação de token
+- `POST /api/token/blacklist/` - Logout (blacklist do refresh token). Corpo: `refresh` (token a invalidar).
 
 ## Contas (usuários e perfil)
 

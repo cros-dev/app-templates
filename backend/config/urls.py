@@ -12,14 +12,18 @@ from apps.accounts.views import (
     CustomTokenObtainPairView,
     CustomTokenRefreshView,
     CustomTokenVerifyView,
+    CustomTokenBlacklistView,
 )
+from apps.core.views import health
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/health/", health, name="health"),
     # Autenticação JWT (views customizadas com OpenAPI)
     path("api/token/", CustomTokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/token/refresh/", CustomTokenRefreshView.as_view(), name="token_refresh"),
     path("api/token/verify/", CustomTokenVerifyView.as_view(), name="token_verify"),
+    path("api/token/blacklist/", CustomTokenBlacklistView.as_view(), name="token_blacklist"),
     # Contas / usuários
     path("api/accounts/", include("apps.accounts.urls")),
     # OpenAPI / Swagger

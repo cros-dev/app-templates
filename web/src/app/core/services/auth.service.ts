@@ -59,9 +59,16 @@ export class AuthService {
   }
 
   /**
-   * Encerra a sessão ativa, removendo os tokens de armazenamento e redefinindo o estado reativo.
+   * Encerra a sessão ativa: envia o refresh token para blacklist na API (quando existir),
+   * remove os tokens do armazenamento e redefini o estado reativo.
    */
   logout(): void {
+    const refreshToken = localStorage.getItem('refresh_token');
+    if (refreshToken) {
+      this.http
+        .post<Record<string, never>>(`${this.apiUrl}/token/blacklist/`, { refresh: refreshToken })
+        .subscribe({ error: () => {} });
+    }
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     this.currentUser.set(null);

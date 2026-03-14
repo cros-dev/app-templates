@@ -17,9 +17,11 @@ Estes componentes podem ser usados sem modificações:
 - Configuração do Django Admin para User
 
 **apps.core**
+- View de health: `GET /api/health/` (retorna `{"status": "ok"}` para load balancer/Kubernetes)
 - Validators genéricos (`validate_cpf`, `validate_cnpj`)
 - Funções utilitárias (`format_phone`, `format_cpf`, `format_cnpj`)
 - Permissão customizada (`IsOwnerOrReadOnly`)
+- Comando de management `create_admin_user` (lê DJANGO_SUPERUSER_* do .env; usado no Docker entrypoint e em runserver local)
 
 **Filtros**
 - Suporte a filtros com `django-filter` para endpoints de listagem
@@ -30,6 +32,7 @@ Estes componentes podem ser usados sem modificações:
 - `POST /api/token/` - Obter token (login). Aceita **email** e **password** no corpo JSON.
 - `POST /api/token/refresh/` - Renovar access token
 - `POST /api/token/verify/` - Verificar token
+- `POST /api/token/blacklist/` - Encerrar sessão (blacklist do refresh token; uso no logout)
 
 **Configuração**
 - JWT com blacklist de tokens habilitado
@@ -50,12 +53,11 @@ Estes componentes podem ser usados sem modificações:
 
 **Ambientes**
 - **Execução Nativa**: Uso de **`.env`** (SQLite/Cache Local) via `python manage.py runserver`.
-- **Deploy**: Orquestração (compose, etc.) fica na **raiz do monorepo**; o backend expõe apenas imagem e entrypoint.
+- **Deploy**: Orquestração na raiz do monorepo. Orientações completas em [docs/deploy/](../docs/deploy/README.md) (execução nativa e Docker).
 
 **Docker (no backend)**
-- `Dockerfile` configurado com Gunicorn
-- `docker-entrypoint.sh` com timeout, migrate, collectstatic e criação de superusuário
-- Compose e deploy unificados ficam na raiz do repositório (padrão do boilerplate)
+- `Dockerfile` configurado com Gunicorn; `docker-entrypoint.sh` com migrate, collectstatic e `create_admin_user`
+- Compose e uso: ver [docs/deploy/docker.md](../docs/deploy/docker.md)
 
 **Makefile**
 - Comandos para desenvolvimento e qualidade de código (format, lint, test-cov)
@@ -206,4 +208,4 @@ apps/
 - **Autenticação**: Por padrão, todas as views requerem autenticação JWT
 - **Paginação**: Padrão de 20 itens por página
 - **Cache**: LocMemCache por padrão, Redis dinâmico se `REDIS_URL` estiver definido
-- **Docker**: Build com `docker build -t backend .`; deploy/orquestração na raiz do monorepo
+- **Docker**: Ver [docs/deploy/docker.md](../docs/deploy/docker.md)

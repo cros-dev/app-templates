@@ -13,19 +13,17 @@ pip install -r requirements.txt
 cp .env.example .env
 # Deixe variáveis de banco vazias para SQLite
 python manage.py migrate
+# Opcional: preencha DJANGO_SUPERUSER_* no .env e rode:
+python manage.py create_admin_user
 python manage.py runserver
 ```
 
-Acesse `http://localhost:8000`. Documentação interativa: `http://localhost:8000/api/docs/`.
+Acesse `http://localhost:8000`. Documentação interativa: `http://localhost:8000/api/docs/`. O mesmo comando `create_admin_user` roda no Docker (entrypoint) e localmente; em ambos os casos as credenciais vêm do `.env` (DJANGO_SUPERUSER_USERNAME, EMAIL, PASSWORD).
 
 ## Configuração
 
 - **Nativo:** copie `.env.example` para `.env` (banco vazio = SQLite).
-- **Deploy:** compose na raiz do monorepo (a implementar); variáveis injetadas no container.
-
-## Deploy (Docker)
-
-No backend ficam apenas **Dockerfile** (Gunicorn) e **docker-entrypoint.sh** (migrate, collectstatic, superusuário opcional). Orquestração na raiz: `docker build -t backend .` e uso no compose da raiz.
+- **Deploy e Docker:** orquestração e orientações em [docs/deploy/](../docs/deploy/README.md) (local e docker-compose.dev.yml).
 
 ## Estrutura
 
@@ -50,6 +48,7 @@ Documentação interativa (Swagger): [http://localhost:8000/api/docs/](http://lo
 | `make help` | Lista comandos |
 | `make run` / `python manage.py runserver` | Servidor de desenvolvimento |
 | `make migrate` / `make makemigrations` | Migrações |
+| `python manage.py create_admin_user` | Cria superusuário com credenciais do .env (Docker e local) |
 | `make format` / `make lint` / `make test-cov` | Qualidade (black, flake8, pytest) |
 | `make check` | format + lint + test-cov |
 
@@ -59,7 +58,7 @@ Django 6 · DRF · Simple JWT · drf-spectacular (OpenAPI) · django-cors-header
 
 ## Documentação
 
-**Deste pacote:** [TEMPLATE.md](./TEMPLATE.md) (uso como template) · [ARCHITECTURE.md](./ARCHITECTURE.md) (convenções) · [QUALITY.md](./QUALITY.md) (qualidade) · [CHANGELOG.md](./CHANGELOG.md) (histórico).
+**Deste pacote:** [TEMPLATE.md](./TEMPLATE.md) (uso como template) · [ARCHITECTURE.md](./ARCHITECTURE.md) (convenções) · [QUALITY.md](./QUALITY.md) (qualidade). **Histórico do template (incl. backend):** [../CHANGELOG.md](../CHANGELOG.md).
 
 **Compartilhada (docs/):** [api-spec](../docs/system/api-spec.md) · [data-model](../docs/system/data-model.md) · [business-rules](../docs/system/business-rules.md) · [postman-guide](../docs/system/postman-guide.md) · [decisions](../docs/decisions/index.md) · [CONTRIBUTING](../docs/CONTRIBUTING.md).
 

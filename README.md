@@ -35,34 +35,16 @@ Siga esta checklist para deixar o novo projeto consistente:
 | **Docs** | Preencher `docs/product/vision.md` (público, escopo do MVP, etc.) conforme o novo produto. |
 | **Opcional** | Renomear o repositório; trocar título em `web/src/index.html`; ajustar `web/package.json` name e CORS no backend (`.env`) se a origem do front for diferente de `http://localhost:4200`. |
 
-### 3. Backend
+### 3. Rodar o projeto
 
-```bash
-cd backend
-python -m venv venv
-# Windows: venv\Scripts\activate
-# Linux/Mac: source venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env
-# Ajuste .env (deixe variáveis de banco vazias para SQLite em dev)
-python manage.py migrate
-python manage.py runserver
-```
+- **Execução nativa (backend + web no host):** [docs/deploy/local.md](docs/deploy/local.md) — runserver, ng serve, create_admin_user, .env.
+- **Docker Compose (tudo em containers com hot-reload):** [docs/deploy/docker.md](docs/deploy/docker.md) — `docker compose -f docker-compose.dev.yml up -d --build` na raiz.
 
-API em `http://localhost:8000`.
+Resumo rápido nativo: `cd backend && pip install -r requirements.txt && cp .env.example .env && python manage.py migrate && python manage.py create_admin_user && python manage.py runserver` (API em :8000). Em outro terminal: `cd web && npm install && ng serve` (app em :4200).
 
-### 4. Web
+### 4. Onde está cada coisa
 
-```bash
-cd web
-npm install
-ng serve
-```
-
-App em `http://localhost:4200`.
-
-### 5. Onde está cada coisa
-
+- **Deploy e execução:** [docs/deploy/](docs/deploy/README.md) (local e Docker).
 - **Configuração:** `backend/.env.example` e [backend/TEMPLATE.md](backend/TEMPLATE.md) (backend); [web/TEMPLATE.md](web/TEMPLATE.md) (frontend).
 - **Documentação compartilhada:** [docs/README.md](docs/README.md) (estrutura de product/, system/, decisões). Especificação da API e modelo de dados: [docs/system/api-spec.md](docs/system/api-spec.md), [docs/system/data-model.md](docs/system/data-model.md).
 - **Swagger (API):** com o backend rodando, [http://localhost:8000/api/docs/](http://localhost:8000/api/docs/).
@@ -79,6 +61,7 @@ App em `http://localhost:4200`.
 | [web/ARCHITECTURE.md](web/ARCHITECTURE.md) | Arquitetura e convenções do frontend |
 | [web/TEMPLATE.md](web/TEMPLATE.md) | Adaptar o front (environment, nome, título) |
 | [docs/README.md](docs/README.md) | Índice da doc compartilhada (system, product, decisões) |
+| [docs/deploy/](docs/deploy/README.md) | Deploy e execução (local e Docker) |
 | [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | Padrão de commits e contribuição |
 
 ## Stack

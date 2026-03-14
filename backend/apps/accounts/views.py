@@ -13,6 +13,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
     TokenVerifyView,
+    TokenBlacklistView,
 )
 from drf_spectacular.utils import extend_schema, extend_schema_view
 
@@ -80,6 +81,24 @@ class CustomTokenRefreshView(TokenRefreshView):
 )
 class CustomTokenVerifyView(TokenVerifyView):
     """View customizada para verificação de token JWT com metadados OpenAPI."""
+    pass
+
+
+@extend_schema_view(
+    post=extend_schema(
+        tags=["Autenticação"],
+        summary="Encerrar sessão (blacklist do refresh token)",
+        description=(
+            "Invalida o **refresh token** enviado no corpo, colocando-o na blacklist. "
+            "Espera um JSON com o campo `refresh` contendo o refresh token JWT. "
+            "Após chamar este endpoint, o refresh token não poderá mais ser usado para obter "
+            "novos access tokens. O access token continua válido até expirar. "
+            "Use no logout do cliente: envie o refresh atual e descarte os tokens localmente."
+        ),
+    )
+)
+class CustomTokenBlacklistView(TokenBlacklistView):
+    """View customizada para blacklist de refresh token (logout) com metadados OpenAPI."""
     pass
 
 

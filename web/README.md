@@ -30,11 +30,15 @@ Acesse `http://localhost:4200/`. O backend deve estar rodando em `http://localho
 | Comando     | Descrição                    |
 |------------|------------------------------|
 | `ng serve` | Servidor de desenvolvimento  |
-| `ng build` | Build de produção (`dist/`)  |
+| `ng build` | Build de produção (`dist/web/browser/`)  |
 | `ng test`  | Testes unitários (Vitest)     |
 | `ng e2e`   | Testes end-to-end (se configurado) |
 
 Para mais comandos: `ng help` ou [Angular CLI](https://angular.dev/tools/cli).
+
+## Produção (nginx)
+
+Para servir o build com nginx (container ou servidor), use o `nginx.conf` na raiz do web: ele define `root /usr/share/nginx/html` e `try_files $uri $uri/ /index.html` para o roteamento do Angular. Após `ng build`, copie o conteúdo de `dist/web/browser/` para o document root do nginx (ex.: `/usr/share/nginx/html`).
 
 ## Integração com a API
 
