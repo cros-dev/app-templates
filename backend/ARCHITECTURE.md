@@ -72,9 +72,11 @@ Estes componentes podem ser usados sem modificações:
 
 ### Documentação
 
-- Estrutura consolidada em [`docs/README.md`](./docs/README.md)
-- Guia de contribuição em [`docs/CONTRIBUTING.md`](./docs/CONTRIBUTING.md)
-- ADRs em [`docs/decisions/index.md`](./docs/decisions/index.md)
+A documentação compartilhada do monorepo fica na raiz do repositório (`docs/`). Especificação da API e modelo de dados: `docs/system/api-spec.md`, `docs/system/data-model.md`. Swagger (OpenAPI) com o servidor rodando: `http://localhost:8000/api/docs/`.
+
+- Estrutura consolidada em [`docs/README.md`](../docs/README.md)
+- Guia de contribuição em [`docs/CONTRIBUTING.md`](../docs/CONTRIBUTING.md)
+- ADRs em [`docs/decisions/index.md`](../docs/decisions/index.md)
 
 ## Precisa Adaptar
 
@@ -123,9 +125,9 @@ class ExampleViewSet(viewsets.ModelViewSet):
 
 ### 3. CORS
 
-Arquivo: `config/settings.py`
+Arquivo: `config/settings.py`. Variável: `CORS_ALLOWED_ORIGINS` no `.env`.
 
-Em produção, configure `CORS_ALLOWED_ORIGINS` no `.env` com as origens permitidas.
+Em desenvolvimento local, o frontend Angular (`ng serve`) usa por padrão a origem `http://localhost:4200`. Em produção, defina as origens permitidas (separadas por vírgula). Ver `backend/.env.example`.
 
 ### 4. Models e Apps
 

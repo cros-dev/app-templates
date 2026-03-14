@@ -24,7 +24,18 @@ app-templates/
 - **GitHub:** use o botão **"Use this template"** no repositório.
 - **Cópia local:** clone o repositório, opcionalmente remova `.git` e inicie um novo (`git init`).
 
-### 2. Backend
+### 2. Ao criar um projeto a partir do template
+
+Siga esta checklist para deixar o novo projeto consistente:
+
+| Onde | O que fazer |
+|------|-------------|
+| **Backend** | Copiar `backend/.env.example` → `backend/.env`; ajustar `SECRET_KEY`, `ALLOWED_HOSTS` e, se for usar PostgreSQL/Redis, preencher as variáveis correspondentes. Ver [backend/TEMPLATE.md](backend/TEMPLATE.md). |
+| **Web** | Ajustar a URL da API em `web/src/environments/environment.development.ts` (dev) e `web/src/environments/environment.ts` (prod). Ver [web/TEMPLATE.md](web/TEMPLATE.md). |
+| **Docs** | Preencher `docs/product/vision.md` (público, escopo do MVP, etc.) conforme o novo produto. |
+| **Opcional** | Renomear o repositório; trocar título em `web/src/index.html`; ajustar `web/package.json` name e CORS no backend (`.env`) se a origem do front for diferente de `http://localhost:4200`. |
+
+### 3. Backend
 
 ```bash
 cd backend
@@ -40,7 +51,7 @@ python manage.py runserver
 
 API em `http://localhost:8000`.
 
-### 3. Web
+### 4. Web
 
 ```bash
 cd web
@@ -50,9 +61,9 @@ ng serve
 
 App em `http://localhost:4200`.
 
-### 4. Onde está cada coisa
+### 5. Onde está cada coisa
 
-- **Configuração:** `backend/.env.example` e [backend/TEMPLATE.md](backend/TEMPLATE.md) (uso como template, env, novos apps).
+- **Configuração:** `backend/.env.example` e [backend/TEMPLATE.md](backend/TEMPLATE.md) (backend); [web/TEMPLATE.md](web/TEMPLATE.md) (frontend).
 - **Documentação compartilhada:** [docs/README.md](docs/README.md) (estrutura de product/, system/, decisões). Especificação da API e modelo de dados: [docs/system/api-spec.md](docs/system/api-spec.md), [docs/system/data-model.md](docs/system/data-model.md).
 - **Swagger (API):** com o backend rodando, [http://localhost:8000/api/docs/](http://localhost:8000/api/docs/).
 
@@ -65,6 +76,8 @@ App em `http://localhost:4200`.
 | [backend/ARCHITECTURE.md](backend/ARCHITECTURE.md) | Arquitetura e convenções do backend |
 | [backend/QUALITY.md](backend/QUALITY.md) | Qualidade de código (black, flake8, pytest) |
 | [web/README.md](web/README.md) | Como rodar o frontend, integração com a API |
+| [web/ARCHITECTURE.md](web/ARCHITECTURE.md) | Arquitetura e convenções do frontend |
+| [web/TEMPLATE.md](web/TEMPLATE.md) | Adaptar o front (environment, nome, título) |
 | [docs/README.md](docs/README.md) | Índice da doc compartilhada (system, product, decisões) |
 | [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | Padrão de commits e contribuição |
 

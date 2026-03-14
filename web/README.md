@@ -45,6 +45,7 @@ Para mais comandos: `ng help` ou [Angular CLI](https://angular.dev/tools/cli).
 ## Documentação
 
 - **Monorepo:** [README na raiz](../README.md)
+- **Ao usar como template:** [TEMPLATE.md](./TEMPLATE.md) (environment, nome do pacote, título, CORS)
 - **Backend:** [backend/README.md](../backend/README.md) · Swagger: `http://localhost:8000/api/docs/` (com backend rodando)
 - **Especificação da API:** [docs/system/api-spec.md](../docs/system/api-spec.md) · [docs/system/data-model.md](../docs/system/data-model.md)
 - **Docs compartilhadas:** [docs/README.md](../docs/README.md)

@@ -2,7 +2,9 @@
 
 Este diretório contém o registro de decisões de arquitetura e produto do projeto criado a partir do template.
 
-## Decisões Aceitas
+As decisões listadas abaixo são **exemplos incluídos no template**. Ao criar um novo projeto, você pode mantê-las, alterá-las ou substituir por ADRs próprias; o importante é que o time documente as escolhas que impactam o produto ou a arquitetura.
+
+## Decisões Aceitas (exemplos do template)
 
 1. **Backend como fonte única da verdade**
    * **Motivo:** Evitar inconsistência e fraude. Garantir que regras críticas sejam sempre validadas no servidor.
@@ -26,5 +28,5 @@ Este diretório contém o registro de decisões de arquitetura e produto do proj
 
 ---
 
-**Status:** Decisões consolidadas  
-**Última atualização:** 2026-01-26
+**Status:** Exemplos do template (adaptar ao projeto)  
+**Última atualização:** 2026-03-11

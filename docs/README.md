@@ -61,7 +61,7 @@ Especificação e padrões do sistema: [api-spec.md](system/api-spec.md) (endpoi
 Documentação técnica específica fica em cada pacote:
 
 - **Backend:** [backend/ARCHITECTURE.md](../backend/ARCHITECTURE.md) | [backend/QUALITY.md](../backend/QUALITY.md)
-- **Web:** [web/README.md](../web/README.md) | [web/ARCHITETURE.md](../web/ARCHITETURE.md) (se existir)
+- **Web:** [web/README.md](../web/README.md) | [web/ARCHITECTURE.md](../web/ARCHITECTURE.md)
 
 ## Fonte da Verdade
 

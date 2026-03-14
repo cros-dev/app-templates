@@ -1,5 +1,9 @@
 # Arquitetura e Padrões
 
+## 0. Configuração global (app.config.ts)
+
+O bootstrap da aplicação usa as APIs atuais do Angular (sem símbolos depreciados): **provideAppInitializer** para inicialização no startup (ex.: aplicação do tema a partir do `ThemeService`) e **provideAnimations** para suporte a animações (ex.: Angular Material). A URL da API e ajustes por ambiente ficam em `src/environments/`; ao usar o projeto como template, ver [TEMPLATE.md](./TEMPLATE.md).
+
 ## 1. Padrão Arquitetural
 Este projeto segue uma **Feature-Based Architecture** (Arquitetura Baseada em Funcionalidades) utilizando **Angular Standalone Components**.
 

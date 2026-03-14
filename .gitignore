@@ -17,6 +17,7 @@
 # Sistema
 .DS_Store
 Thumbs.db
+nul
 
 # Logs e cache na raiz (se algum script rodar aqui)
 *.log
