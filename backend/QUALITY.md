@@ -2,7 +2,7 @@
 
 Este documento descreve as ferramentas de qualidade de código configuradas no backend e como utilizá-las.
 
-**Para workflow de commits e padrões, veja [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md).**
+**Para workflow de commits e padrões, veja [docs/CONTRIBUTING.md](../docs/CONTRIBUTING.md).**
 
 ## Ferramentas Instaladas
 
@@ -15,7 +15,7 @@ Este documento descreve as ferramentas de qualidade de código configuradas no b
 
 ## Uso Rápido
 
-**Nota:** Para workflow completo antes de commits, veja [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md).
+**Nota:** Para workflow completo antes de commits, veja [docs/CONTRIBUTING.md](../docs/CONTRIBUTING.md).
 
 ### Comandos Makefile (Linux/Mac)
 
@@ -196,7 +196,7 @@ coverage report --show-missing
 ## Estrutura de Arquivos
 
 ```
-django-backend-template/
+backend/
 ├── pytest.ini          # Configuração do pytest
 ├── .flake8             # Configuração do flake8
 ├── .coveragerc         # Configuração do coverage
@@ -206,7 +206,7 @@ django-backend-template/
 
 ## Workflow Recomendado
 
-**Para workflow completo antes de commits, consulte [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md#-validação-de-commits).**
+**Para workflow completo antes de commits, consulte [docs/CONTRIBUTING.md](../docs/CONTRIBUTING.md#-validação-de-commits).**
 
 ### Em CI/CD:
 

@@ -134,7 +134,7 @@ pytest
 make check
 ```
 
-**Detalhes técnicos das ferramentas:** Veja [`../QUALITY.md`](../QUALITY.md).
+**Detalhes técnicos das ferramentas:** Veja [backend/QUALITY.md](../backend/QUALITY.md).
 
 ### Checklist Antes de Commit
 
