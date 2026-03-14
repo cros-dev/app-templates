@@ -242,6 +242,13 @@ LOGGING = {
         "handlers": ["console"],
         "level": "DEBUG" if DEBUG else "INFO",
     },
+    "loggers": {
+        "audit": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
 }
 
 # =========================================================

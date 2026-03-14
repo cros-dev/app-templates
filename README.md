@@ -46,7 +46,7 @@ Resumo rápido nativo: `cd backend && pip install -r requirements.txt && cp .env
 
 - **Deploy e execução:** [docs/deploy/](docs/deploy/README.md) (local e Docker).
 - **Configuração:** `backend/.env.example` e [backend/TEMPLATE.md](backend/TEMPLATE.md) (backend); [web/TEMPLATE.md](web/TEMPLATE.md) (frontend).
-- **Documentação compartilhada:** [docs/README.md](docs/README.md) (estrutura de product/, system/, decisões). Especificação da API e modelo de dados: [docs/system/api-spec.md](docs/system/api-spec.md), [docs/system/data-model.md](docs/system/data-model.md).
+- **Documentação compartilhada:** [docs/README.md](docs/README.md) (estrutura de product/, system/, decisões). Especificação da API e modelo de dados: [docs/system/api-spec.md](docs/system/api-spec.md), [docs/system/data-model.md](docs/system/data-model.md). Auditoria: [docs/system/audit-logging.md](docs/system/audit-logging.md).
 - **Swagger (API):** com o backend rodando, [http://localhost:8000/api/docs/](http://localhost:8000/api/docs/).
 
 ## Documentação

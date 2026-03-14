@@ -17,6 +17,9 @@ from rest_framework_simplejwt.views import (
 )
 from drf_spectacular.utils import extend_schema, extend_schema_view
 
+from apps.core.audit import log_event
+from apps.core.events import USER_LOGIN, USER_LOGOUT, PROFILE_UPDATED
+
 from .serializers import (
     UserSerializer,
     UserProfileSerializer,
@@ -46,6 +49,16 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     """View customizada para login JWT exclusivamente por email."""
 
     serializer_class = CustomTokenObtainPairSerializer
+
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        if response.status_code == 200:
+            log_event(
+                USER_LOGIN,
+                request=request,
+                email=request.data.get("email", ""),
+            )
+        return response
 
 
 @extend_schema_view(
@@ -99,7 +112,12 @@ class CustomTokenVerifyView(TokenVerifyView):
 )
 class CustomTokenBlacklistView(TokenBlacklistView):
     """View customizada para blacklist de refresh token (logout) com metadados OpenAPI."""
-    pass
+
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        if response.status_code in (200, 204):
+            log_event(USER_LOGOUT, request=request)
+        return response
 
 
 # ---------------------------------------------------------------------------
@@ -152,6 +170,7 @@ class UserProfileView(generics.RetrieveUpdateAPIView):
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
+        log_event(PROFILE_UPDATED, request=request)
         return Response(serializer.data)
 
 

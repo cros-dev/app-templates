@@ -1,6 +1,6 @@
 # Uso: na raiz do repositório, `docker compose -f docker-compose.dev.yml up -d --build`
 # Serviços: db (PostgreSQL), backend (runserver), frontend (ng serve). Código montado em volumes.
-# Superusuário: defina DJANGO_SUPERUSER_* no .env da raiz; o entrypoint executa create_admin_user.
+# Superusuário: defina DJANGO_SUPERUSER_* em backend/.env; o entrypoint executa create_admin_user.
 
 name: app-templates-dev
 
@@ -32,6 +32,8 @@ services:
       - ./backend:/app
     ports:
       - "8000:8000"
+    env_file:
+      - ./backend/.env
     environment:
       SECRET_KEY: ${SECRET_KEY:-dev-secret-key-change-in-production}
       DEBUG: "true"
@@ -42,9 +44,6 @@ services:
       POSTGRES_HOST: db
       POSTGRES_PORT: "5432"
       CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:4200}
-      DJANGO_SUPERUSER_USERNAME: ${DJANGO_SUPERUSER_USERNAME:-}
-      DJANGO_SUPERUSER_EMAIL: ${DJANGO_SUPERUSER_EMAIL:-}
-      DJANGO_SUPERUSER_PASSWORD: ${DJANGO_SUPERUSER_PASSWORD:-}
     depends_on:
       db:
         condition: service_healthy

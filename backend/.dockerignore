@@ -1,3 +1,4 @@
+# Ambientes virtuais (evitar acesso a .venv/lib64 no Windows no build context)
 .venv
 .venv/
 **/.venv/
@@ -5,7 +6,9 @@ venv
 venv/
 env/
 lib64
+lib64/
 Lib
+Lib/
 __pycache__/
 *.py[cod]
 *.so

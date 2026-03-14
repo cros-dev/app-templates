@@ -74,7 +74,7 @@ Estes componentes podem ser usados sem modificações:
 
 ### Documentação
 
-A documentação compartilhada do monorepo fica na raiz do repositório (`docs/`). Especificação da API e modelo de dados: `docs/system/api-spec.md`, `docs/system/data-model.md`. Swagger (OpenAPI) com o servidor rodando: `http://localhost:8000/api/docs/`.
+A documentação compartilhada do monorepo fica na raiz do repositório (`docs/`). Especificação da API e modelo de dados: `docs/system/api-spec.md`, `docs/system/data-model.md`. Logs de auditoria: `docs/system/audit-logging.md`. Swagger (OpenAPI) com o servidor rodando: `http://localhost:8000/api/docs/`.
 
 - Estrutura consolidada em [`docs/README.md`](../docs/README.md)
 - Guia de contribuição em [`docs/CONTRIBUTING.md`](../docs/CONTRIBUTING.md)
