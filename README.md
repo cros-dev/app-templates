@@ -69,6 +69,10 @@ Resumo rápido nativo: `cd backend && pip install -r requirements.txt && cp .env
 - **Backend:** Django 6, Django REST Framework, Simple JWT, drf-spectacular (OpenAPI/Swagger), django-cors-headers, PostgreSQL (prod) ou SQLite (dev).
 - **Web:** Angular 21, Angular Material (conforme projeto).
 
+## CI
+
+O repositório usa GitHub Actions (`.github/workflows/ci.yml`): CI roda em push e em pull requests para as branches `master` e `dev`. **Backend:** Python 3.12, `black --check`, `flake8`, `pytest` (working-directory: `backend`). **Web:** Node 20, `npm ci`, `ng build` (working-directory: `web`). Para novos workflows (ex.: release, deploy), crie `.yml` em `.github/workflows/` e documente em [docs/deploy/](docs/deploy/README.md) ou no README conforme o caso.
+
 ## Licença
 
 Conforme definido no repositório.
