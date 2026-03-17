@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { AuthService } from '../../core/services/auth.service';
+import { DialogService } from '../../core/services/dialog.service';
 import { LayoutService } from '../../core/services/layout.service';
 import { ThemeService } from '../../core/services/theme.service';
 
@@ -13,6 +14,7 @@ import { ThemeService } from '../../core/services/theme.service';
 })
 export class HeaderComponent {
   private readonly authService = inject(AuthService);
+  private readonly dialogService = inject(DialogService);
   private readonly layoutService = inject(LayoutService);
   private readonly router = inject(Router);
 
@@ -34,10 +36,21 @@ export class HeaderComponent {
   }
 
   /**
-   * Finaliza a sessão do usuário e redireciona para a tela de login.
+   * Abre o diálogo de confirmação de saída; em caso de confirmação, finaliza a sessão e redireciona para o login.
    */
   handleLogout(): void {
-    this.authService.logout();
-    void this.router.navigate(['/auth/login']);
+    const ref = this.dialogService.openConfirm({
+      title: 'Sair da conta?',
+      message: 'Deseja realmente encerrar a sessão?',
+      confirmLabel: 'Sair',
+      cancelLabel: 'Cancelar',
+      isDestructive: true
+    });
+    ref.subscribe((confirmed) => {
+      if (confirmed) {
+        this.authService.logout();
+        void this.router.navigate(['/auth/login']);
+      }
+    });
   }
 }

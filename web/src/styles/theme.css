@@ -213,4 +213,76 @@
   .mat-mdc-menu-item {
     @apply rounded-md! text-gray-600 dark:text-text-dark hover:bg-surface-hover-light! dark:hover:bg-surface-hover-dark! transition-colors duration-200!;
   }
+
+  /* Dialog: fundo, borda e textos seguem tokens (overlay fica no body, herda .dark do html) */
+  .mat-mdc-dialog-surface {
+    @apply bg-panel-light! dark:bg-panel-dark! rounded-xl! border! border-border-light! dark:border-border-dark! shadow-xl!;
+  }
+
+  .mat-mdc-dialog-title {
+    @apply text-gray-900! dark:text-text-dark!;
+  }
+
+  .mat-mdc-dialog-content {
+    @apply text-gray-600! dark:text-text-dark!;
+  }
+
+  .dark .mat-mdc-button:not(:disabled) {
+    color: var(--color-text-dark);
+  }
+
+  /* Toast/Snackbar: fundo, borda e cores por tipo */
+  .mat-mdc-snack-bar-container {
+    --mdc-snackbar-container-color: var(--color-panel-light);
+    --mdc-snackbar-supporting-text-color: var(--color-gray-700);
+    --mat-snack-bar-button-color: var(--color-gray-700);
+    @apply rounded-xl! border! border-border-light! shadow-lg!;
+  }
+
+  .dark .mat-mdc-snack-bar-container {
+    --mdc-snackbar-container-color: var(--color-panel-dark);
+    --mdc-snackbar-supporting-text-color: var(--color-text-dark);
+    --mat-snack-bar-button-color: var(--color-text-dark);
+    @apply border-border-dark!;
+  }
+
+  .toast-success {
+    --mdc-snackbar-supporting-text-color: var(--color-success-text);
+    --mat-snack-bar-button-color: var(--color-success-text);
+  }
+
+  .dark .toast-success {
+    --mdc-snackbar-supporting-text-color: var(--color-success-text-dark);
+    --mat-snack-bar-button-color: var(--color-success-text-dark);
+  }
+
+  .toast-error {
+    --mdc-snackbar-supporting-text-color: var(--color-error-text);
+    --mat-snack-bar-button-color: var(--color-error-text);
+  }
+
+  .dark .toast-error {
+    --mdc-snackbar-supporting-text-color: var(--color-error-text-dark);
+    --mat-snack-bar-button-color: var(--color-error-text-dark);
+  }
+
+  .toast-warning {
+    --mdc-snackbar-supporting-text-color: var(--color-yellow-700);
+    --mat-snack-bar-button-color: var(--color-yellow-700);
+  }
+
+  .dark .toast-warning {
+    --mdc-snackbar-supporting-text-color: var(--color-yellow-400);
+    --mat-snack-bar-button-color: var(--color-yellow-400);
+  }
+
+  .toast-info {
+    --mdc-snackbar-supporting-text-color: var(--color-blue-700);
+    --mat-snack-bar-button-color: var(--color-blue-700);
+  }
+
+  .dark .toast-info {
+    --mdc-snackbar-supporting-text-color: var(--color-blue-400);
+    --mat-snack-bar-button-color: var(--color-blue-400);
+  }
 }

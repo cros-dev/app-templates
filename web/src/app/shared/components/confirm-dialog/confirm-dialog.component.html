@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+<mat-dialog-content>
+  <p>{{ message }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>{{ cancelLabel }}</button>
+  @if (isDestructive) {
+    <button mat-flat-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>
+      {{ confirmLabel }}
+    </button>
+  } @else {
+    <button mat-flat-button [mat-dialog-close]="true" cdkFocusInitial>
+      {{ confirmLabel }}
+    </button>
+  }
+</mat-dialog-actions>

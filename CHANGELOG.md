@@ -6,6 +6,19 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 
 ## [Unreleased]
 
+### Adicionado
+
+- **DialogService** global no frontend (`core/services/dialog.service.ts`): centraliza abertura de modais via `MatDialog`; método `openConfirm()` para diálogos de confirmação.
+- **ConfirmDialogComponent** em `shared/components/confirm-dialog/`: usa elementos oficiais do Material (`mat-dialog-title`, `mat-dialog-content`, `mat-dialog-actions`, `mat-dialog-close`).
+- Overrides do dialog no `theme.css` (`.mat-mdc-dialog-surface`, título, conteúdo, botões) para respeitar tokens e dark mode.
+- Confirmação ao clicar em "Sair do Sistema" no header (usa `DialogService.openConfirm`).
+- Overrides do snackbar no `theme.css` (`.mat-mdc-snack-bar-container`, `.toast-success`, `.toast-error`, `.toast-info`, `.toast-warning`) para respeitar tokens, dark mode e cores por tipo.
+
+### Alterado
+
+- **ToastService** refatorado: usa `snackBar.open()` conforme documentação oficial; novos métodos `info()` e `warning()`; cores distintas por tipo via `panelClass`.
+- ARCHITECTURE.md: `DialogService` e `ToastService` listados nos serviços singleton do `/core`; orientações de uso na seção 8 (Componentes de Terceiros).
+
 ## [1.5.0] - 2026-03-12
 
 ### Adicionado

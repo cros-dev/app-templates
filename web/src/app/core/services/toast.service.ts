@@ -3,7 +3,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 /**
  * Serviço global de notificações toast (snackbar).
- * Centraliza configuração e uso do MatSnackBar em toda a aplicação.
+ * Centraliza a abertura do MatSnackBar em toda a aplicação.
+ * Use este serviço em vez de injetar MatSnackBar diretamente.
  */
 @Injectable({
   providedIn: 'root'
@@ -21,11 +22,11 @@ export class ToastService {
    * Exibe uma mensagem de sucesso.
    *
    * @param message - Texto exibido no toast.
-   * @param action - Rótulo do botão de ação (default: 'Fechar').
    */
-  success(message: string, action = 'Fechar'): void {
-    this.snackBar.open(message, action, {
-      ...this.defaultConfig
+  success(message: string): void {
+    this.snackBar.open(message, undefined, {
+      ...this.defaultConfig,
+      panelClass: 'toast-success'
     });
   }
 
@@ -33,12 +34,36 @@ export class ToastService {
    * Exibe uma mensagem de erro.
    *
    * @param message - Texto exibido no toast.
-   * @param action - Rótulo do botão de ação (default: 'Fechar').
    */
-  error(message: string, action = 'Fechar'): void {
-    this.snackBar.open(message, action, {
+  error(message: string): void {
+    this.snackBar.open(message, undefined, {
       ...this.defaultConfig,
-      duration: 5000
+      duration: 5000,
+      panelClass: 'toast-error'
+    });
+  }
+
+  /**
+   * Exibe uma mensagem informativa.
+   *
+   * @param message - Texto exibido no toast.
+   */
+  info(message: string): void {
+    this.snackBar.open(message, undefined, {
+      ...this.defaultConfig,
+      panelClass: 'toast-info'
+    });
+  }
+
+  /**
+   * Exibe uma mensagem de alerta.
+   *
+   * @param message - Texto exibido no toast.
+   */
+  warning(message: string): void {
+    this.snackBar.open(message, undefined, {
+      ...this.defaultConfig,
+      panelClass: 'toast-warning'
     });
   }
 }

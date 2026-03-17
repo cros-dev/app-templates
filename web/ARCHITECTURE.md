@@ -11,7 +11,7 @@ O princípio fundamental é o encapsulamento: cada funcionalidade deve ser auto-
 
 ### Estrutura de Diretórios
 
-- `/core`: Serviços singleton globais (Auth, Theme, Toast, Interceptors), guards funcionais e modelos de domínio que atravessam todo o sistema.
+- `/core`: Serviços singleton globais (Auth, Theme, Toast, Dialog, Interceptors), guards funcionais e modelos de domínio que atravessam todo o sistema.
 - `/features`: Módulos independentes por domínio (ex: auth, profile, dashboard). Cada pasta de feature deve conter:
   - `pages/`: Componentes que representam rotas completas ou sub-rotas (Child Routes).
   - `components/`: Componentes internos da funcionalidade.
@@ -149,6 +149,8 @@ Obrigatório o uso de comentários para separar seções lógicas:
 - **Tailwind CSS (Visual)**: 100% do layout e componentes simples.
 - **Angular Material / CDK (Comportamento)**: Reservado para componentes de alta complexidade (modais, datepickers).
 - **Customização**: Overrides repetitivos devem ser centralizados no `theme.css` utilizando tokens de `surface-hover`.
+- **Dialog (MatDialog)**: Usar `DialogService` (core) em vez de injetar `MatDialog` diretamente. Componentes de diálogo em `shared/components/`. Estilos do dialog (`.mat-mdc-dialog-surface`, título, conteúdo, botões) ficam no `theme.css` para respeitar tokens e dark mode.
+- **Toast (MatSnackBar)**: Usar `ToastService` (core) em vez de injetar `MatSnackBar` diretamente. Usa `snackBar.open()` conforme a documentação oficial. Métodos: `success()`, `error()`, `info()`, `warning()`. Estilos (`.mat-mdc-snack-bar-container`, `.toast-success`, etc.) ficam no `theme.css`.
 
 ---
 
