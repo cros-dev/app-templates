@@ -4,7 +4,13 @@ Alterações notáveis do template (monorepo). Histórico único para backend, w
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 
-## [Unreleased]
+## [1.7.0] - 2026-03-18
+
+### Corrigido
+
+- **Backend**: Removido `SessionAuthentication` do DRF (`DEFAULT_AUTHENTICATION_CLASSES`). Evita erro de CSRF em endpoints públicos (signup, etc.) quando acessados via SPA. API agora aceita apenas JWT; Django Admin continua funcionando normalmente (sessão própria).
+
+## [1.6.0] - 2026-03-17
 
 ### Adicionado
 
@@ -17,7 +23,7 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.
 ### Alterado
 
 - **ToastService** refatorado: usa `snackBar.open()` conforme documentação oficial; novos métodos `info()` e `warning()`; cores distintas por tipo via `panelClass`.
-- ARCHITECTURE.md: `DialogService` e `ToastService` listados nos serviços singleton do `/core`; orientações de uso na seção 8 (Componentes de Terceiros).
+- ARCHITECTURE.md (web): `DialogService` e `ToastService` listados nos serviços singleton do `/core`; orientações de uso na seção 8 (Componentes de Terceiros).
 
 ## [1.5.0] - 2026-03-12
 
