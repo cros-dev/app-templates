@@ -4,6 +4,15 @@ Alterações notáveis do template (monorepo). Histórico único para backend, w
 
 O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 
+## [Unreleased]
+
+## [1.8.0] - 2026-03-29
+
+### Adicionado
+
+- **Backend:** `apps.core.models.BaseModel` (abstrato): `id` UUID, `created_at`, `updated_at`, `is_active`.
+- **Docs:** `BaseModel` e auditoria em dados referenciados em [docs/system/data-model.md](docs/system/data-model.md), [backend/ARCHITECTURE.md](backend/ARCHITECTURE.md), [backend/apps/core/README.md](backend/apps/core/README.md), [docs/decisions/index.md](docs/decisions/index.md) e [docs/README.md](docs/README.md); [docs/system/audit-logging.md](docs/system/audit-logging.md) já descreve o padrão.
+
 ## [1.7.0] - 2026-03-18
 
 ### Corrigido

@@ -68,7 +68,7 @@ setup(backend): cria estrutura de apps do backend
 feat(backend): configura ferramentas de qualidade de código
 ```
 
-#### ❌ Exemplos Incorretos
+#### Exemplos Incorretos
 
 ```
 feat: Adiciona login com JWT.  # Ponto final e maiúscula

@@ -12,8 +12,22 @@ Este documento descreve o padrão de **auditoria** no backend: quem fez o quê, 
 
 Os logs de auditoria vão para o logger nomeado **`audit`** (configurado em `config/settings.py`). Por padrão saem no console; **não persistem em banco**. Para auditoria persistida (tabela, SIEM), use um model ou serviço externo.
 
+## Auditoria básica em dados (BaseModel)
+
+A **auditoria básica de criação e atualização de registros** no banco — isto é, saber *quando* um registro foi criado e *quando* foi alterado pela última vez — é feita herdando de **`apps.core.models.BaseModel`** nos models de domínio.
+
+`BaseModel` é abstrato (`Meta.abstract = True`) e define:
+
+- **`id`** — UUID v4 como chave primária (não editável).
+- **`created_at`** — preenchido automaticamente na criação (`auto_now_add`).
+- **`updated_at`** — atualizado automaticamente a cada save (`auto_now`).
+- **`is_active`** — booleano padrão `True`, pensado para **soft delete** (desativar sem apagar a linha).
+
+Isso **não** substitui o rastreamento de *quem* fez a ação nem eventos de negócio no logger **`audit`** (`log_event`); combina-se com esses mecanismos quando for necessário identidade, IP ou eventos nomeados para compliance.
+
 ## Onde está no código
 
+- **core/models.py** — `BaseModel` abstrato: timestamps e soft delete para models que herdam dele.
 - **core/events.py** — Constantes de eventos transversais (auth): `USER_LOGIN`, `USER_LOGOUT`, `PASSWORD_CHANGE`, `USER_CREATED`.
 - **core/audit.py** — Helper `log_event(event_type, request=None, **extra)`; preenche `user_id` e `ip` quando `request` é informado.
 - **accounts/views.py** — Uso: login com sucesso, logout (blacklist) e atualização de perfil disparam `log_event` com os eventos acima.
@@ -79,4 +93,4 @@ O template **não** grava auditoria em tabela. Se o projeto precisar:
 ---
 
 **Status:** Padrão de auditoria no boilerplate  
-**Última atualização:** 2026-03-14
+**Última atualização:** 2026-03-29

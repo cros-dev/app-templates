@@ -14,7 +14,7 @@ docs/
 │   ├── api-spec.md         # Especificação de API (base)
 │   ├── data-model.md       # Modelo de dados (base)
 │   ├── business-rules.md   # Regras de negócio (base)
-│   ├── audit-logging.md    # Logs de auditoria (quem fez o quê)
+│   ├── audit-logging.md    # Auditoria: eventos (log) + carimbos em dados (BaseModel)
 │   └── postman-guide.md    # Padrão de uso do Postman
 ├── deploy/                 # Deploy e execução (local e Docker)
 │   ├── README.md           # Índice e visão geral
@@ -60,7 +60,7 @@ docs/product/
 ## Navegação rápida
 
 - **Deploy e execução:** [deploy/README.md](deploy/README.md) (local e Docker).
-- **Sistema (API e dados):** [api-spec.md](system/api-spec.md) (endpoints) · [data-model.md](system/data-model.md) (modelo de dados) · [business-rules.md](system/business-rules.md) (regras de negócio) · [audit-logging.md](system/audit-logging.md) (auditoria) · [postman-guide.md](system/postman-guide.md) (Postman).
+- **Sistema (API e dados):** [api-spec.md](system/api-spec.md) (endpoints) · [data-model.md](system/data-model.md) (User padrão + `BaseModel`) · [business-rules.md](system/business-rules.md) (regras de negócio) · [audit-logging.md](system/audit-logging.md) (eventos + dados) · [postman-guide.md](system/postman-guide.md) (Postman).
 
 ## Documentação por plataforma
 
@@ -80,4 +80,4 @@ Separação recomendada para manter a informação organizada:
 ---
 
 **Status:** Estrutura de documentação base  
-**Última atualização:** 2026-01-21
+**Última atualização:** 2026-03-29

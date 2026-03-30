@@ -18,6 +18,7 @@ Estes componentes podem ser usados sem modificações:
 
 **apps.core**
 - View de health: `GET /api/health/` (retorna `{"status": "ok"}` para load balancer/Kubernetes)
+- **`BaseModel`** (`models.py`): model abstrato com `id` UUID, `created_at`, `updated_at` e `is_active` (soft delete); models de domínio novos devem herdar dele. Ver [docs/system/data-model.md](../docs/system/data-model.md) e [docs/system/audit-logging.md](../docs/system/audit-logging.md).
 - Validators genéricos (`validate_cpf`, `validate_cnpj`)
 - Funções utilitárias (`format_phone`, `format_cpf`, `format_cnpj`)
 - Permissão customizada (`IsOwnerOrReadOnly`)
@@ -194,6 +195,7 @@ apps/
 │   ├── urls.py
 │   └── tests/
 ├── core/              # Funcionalidades compartilhadas (genérico)
+│   ├── models.py      # BaseModel (abstrato)
 │   ├── validators.py
 │   ├── utils.py
 │   ├── permissions.py

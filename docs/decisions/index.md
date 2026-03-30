@@ -13,10 +13,12 @@ As decisões listadas abaixo são **exemplos incluídos no template**. Ao criar 
 2. **UUID gerado pelo backend**
    * **Motivo:** Garantir unicidade e evitar conflitos em sincronização offline ou distribuída.
    * **Impacto:** UUIDs sempre únicos, evita problemas de sincronização.
+   * **No template:** entidades de domínio que herdam de `apps.core.models.BaseModel` usam UUID v4 como chave primária (o `User` padrão do Django continua com id inteiro até eventual customização).
 
 3. **Timestamp do backend para operações críticas**
    * **Motivo:** Evitar fraudes por manipulação de data/hora no cliente.
    * **Impacto:** Timestamps confiáveis, impossível fraudar horário de operações críticas.
+   * **No template:** `created_at` e `updated_at` em models que herdam `BaseModel` são preenchidos pelo Django no servidor (não pelo cliente).
 
 4. **Sincronização offline com transação atômica**
    * **Motivo:** Garantir que sincronização em lote seja consistente (tudo ou nada).
@@ -29,4 +31,4 @@ As decisões listadas abaixo são **exemplos incluídos no template**. Ao criar 
 ---
 
 **Status:** Exemplos do template (adaptar ao projeto)  
-**Última atualização:** 2026-03-11
+**Última atualização:** 2026-03-29
